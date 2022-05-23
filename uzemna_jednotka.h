@@ -31,6 +31,10 @@ namespace uzemne_jednotky
 		void setScholarship(structures::UnsortedSequenceTable<std::wstring, int>* scholarship);
 
 		void addSubUnit(UzemnaJednotka* subUnit);
+
+		int countSubUnits();
+		int countObyvatelstvo();
+		int countObyvatelstvoVzdel();
 	};
 
 	inline UzemnaJednotka::UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle) :
@@ -89,5 +93,34 @@ namespace uzemne_jednotky
 	inline void UzemnaJednotka::addSubUnit(UzemnaJednotka* subUnit)
 	{
 		subUnits_->add(subUnit);
+	}
+
+	inline int UzemnaJednotka::countSubUnits()
+	{
+		return subUnits_->size();
+	}
+
+	inline int UzemnaJednotka::countObyvatelstvo()
+	{
+		int result = 0;
+		for (int i = 0; i < ageMen_->size(); i++) {
+			result += ageMen_->at(i);
+		}
+
+		for (int i = 0; i < ageWomen_->size(); i++) {
+			result += ageWomen_->at(i);
+		}
+
+		return result;
+	}
+
+	inline int UzemnaJednotka::countObyvatelstvoVzdel()
+	{
+		int result = 0;
+		for (auto item : *scholarship_) {
+			result += item->accessData();
+		}
+
+		return result;
 	}
 }

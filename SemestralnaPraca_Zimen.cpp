@@ -3,7 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include "../SemestralnaPraca_Zimen/main.h"
+#include "../SemestralnaPraca_Zimen/loader.h"
+#include "../SemestralnaPraca_Zimen/structures/heap_monitor.h"
 
 #include <Windows.h>
 #pragma execution_character_set("utf-8")
@@ -11,6 +12,6 @@
 int main()
 {
     SetConsoleOutputCP(65001);
-    auto statP = new hlavny::Main();
+    auto statP = new data_loading::Loader();
     delete statP;
 }

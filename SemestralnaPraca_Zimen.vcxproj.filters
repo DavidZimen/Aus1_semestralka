@@ -41,7 +41,7 @@
     <Filter Include="uzemne_jednotky">
       <UniqueIdentifier>{52c69e75-3b96-40fb-843b-840a5f743ebc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main">
+    <Filter Include="data_loading">
       <UniqueIdentifier>{fa1194c1-d713-4ee4-b524-10e0c7848f75}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -210,8 +210,8 @@
     <ClInclude Include="uzemna_jednotka.h">
       <Filter>uzemne_jednotky</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>main</Filter>
+    <ClInclude Include="loader.h">
+      <Filter>data_loading</Filter>
     </ClInclude>
     <ClInclude Include="typ_uj.h">
       <Filter>uzemne_jednotky</Filter>

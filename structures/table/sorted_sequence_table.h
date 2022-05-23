@@ -83,12 +83,7 @@ namespace structures
 		bool found = false;
 		int index = indexOfKey(key, 0, this->size() - 1, found);
 
-		if (!found) {
-			SequenceTable<K, T>::list_->insert(new TableItem<K, T>(key, data), index);
-		}
-		else {
-			throw std::logic_error("Key already exists !");
-		}
+		SequenceTable<K, T>::list_->insert(new TableItem<K, T>(key, data), index);
 	}
 
 	template<typename K, typename T>
