@@ -177,7 +177,7 @@ namespace structures
 	}
 
 	template<typename K, typename T>
-	inline int Treap<K, T>::extractPriority(BinarySearchTree<K, T>::BSTTreeNode * node)
+	inline int Treap<K, T>::extractPriority(BinarySearchTree<K, T>::BSTTreeNode* node)
 	{
 		//TODO 10: Treap
 		throw std::runtime_error("Treap<K, T>::extractPriority: Not implemented yet.");

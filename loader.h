@@ -10,46 +10,39 @@
 
 namespace data_loading
 {
-	class Loader 
+	class Loader
 	{
 	private:
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje_;
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy_;
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce_;
-
 		const wchar_t delimeter_ = L';';
 		const wchar_t eolChar_ = L'\n';
+
 	public:
-		Loader();
-		~Loader();
-		void LoadData();
+		static Loader& getInstance();
+
+	public:
+		void LoadData(structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje,
+			structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy,
+			structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce);
 		void parseLine(std::wstring& pLine, structures::Array<int>* pArray);
 		void toScholarshipTable(structures::Array<int>* scholArray, structures::UnsortedSequenceTable<std::wstring, int>* scholTable);
 		int findAndMove(std::wstring& line, int& iDel, int& iSubstr);
 		void addToSupUnit(structures::Array<int>* sup, structures::Array<int>* sub);
+
+	private:
+		Loader() = default;
+		Loader(const Loader&) = delete;
 	};
 
 
-	inline Loader::Loader() :
-		kraje_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>),
-		okresy_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>),
-		obce_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>)
+	inline Loader& Loader::getInstance()
 	{
-		LoadData();
+		static Loader instance;
+		return instance;
 	}
 
-	inline Loader::~Loader()
-	{
-		delete kraje_;
-		delete okresy_;
-		delete obce_;
-
-		kraje_ = nullptr;
-		okresy_ = nullptr;
-		obce_ = nullptr;
-	}
-
-	inline void Loader::LoadData()
+	inline void Loader::LoadData(structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje,
+		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy,
+		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce)
 	{
 		std::wcout << "Starting loading..." << std::endl;
 
@@ -91,25 +84,30 @@ namespace data_loading
 		std::wstring okCode, okOfficialTitle, okShortTitle = L"";
 		std::wstring obCode, obOfficialTitle, obMediumTitle, obShortTitle, lineAge, lineSchool = L"";
 
+		//premenne na vytvorenie uzemnej jednotky po nacitani prislusnych hodnot zo suboru
 		uzemne_jednotky::UzemnaJednotka* kraj = nullptr;
 		uzemne_jednotky::UzemnaJednotka* okres = nullptr;
 		uzemne_jednotky::UzemnaJednotka* obec = nullptr;
 
+		//pomocne struktury na informacie pre kraj 
 		structures::Array<int>* vekMuziKr = nullptr;
 		structures::Array<int>* vekZenyKr = nullptr;
 		structures::Array<int>* vzdelanieArrKr = nullptr;
 		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanieKr = nullptr;
 
+		//pomocne struktury na informacie pre okres 
 		structures::Array<int>* vekMuziOk = nullptr;
 		structures::Array<int>* vekZenyOk = nullptr;
 		structures::Array<int>* vzdelanieArrOk = nullptr;
 		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanieOk = nullptr;
 
+		//pomocne struktury na informacie pre obec 
 		structures::Array<int>* vekMuziOb = nullptr;
 		structures::Array<int>* vekZenyOb = nullptr;
 		structures::Array<int>* vzdelanieArrOb = nullptr;
 		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanieOb = nullptr;
 
+		//uchovanie uj, ktora uz je mimo daneho kraja, aby nedoslo ku strate dat
 		uzemne_jednotky::UzemnaJednotka* okresMimoKraja = nullptr;
 		uzemne_jednotky::UzemnaJednotka* obecMimoOkresu = nullptr;
 
@@ -136,7 +134,7 @@ namespace data_loading
 				addToSupUnit(vzdelanieArrKr, vzdelanieArrOk);
 
 				std::wcout << "Vkladam okres: " << okCode << std::endl;
-				okresy_->insert(okCode, okres);
+				okresy->insert(okCode, okres);
 				kraj->addSubUnit(okres);
 				okresMimoKraja = nullptr;
 			}
@@ -160,11 +158,11 @@ namespace data_loading
 					addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
 
 					std::wcout << "Vkladam obec: " << obCode << std::endl;
-					obce_->insert(obCode, obec);
+					obce->insert(obCode, obec);
 					okres->addSubUnit(obec);
 					obecMimoOkresu = nullptr;
 				}
-				
+
 				while (obecMimoOkresu == nullptr && !fileObce.eof()) {
 					vekMuziOb = new structures::Array<int>(101);
 					vekZenyOb = new structures::Array<int>(101);
@@ -204,7 +202,7 @@ namespace data_loading
 						addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
 
 						std::wcout << "Vkladam obec: " << obCode << std::endl;
-						obce_->insert(obCode, obec);
+						obce->insert(obCode, obec);
 						okres->addSubUnit(obec);
 					}
 					else {
@@ -223,7 +221,7 @@ namespace data_loading
 					addToSupUnit(vzdelanieArrKr, vzdelanieArrOk);
 
 					std::wcout << "Vkladam okres: " << okCode << std::endl;
-					okresy_->insert(okCode, okres);
+					okresy->insert(okCode, okres);
 					kraj->addSubUnit(okres);
 				}
 				else {
@@ -237,7 +235,7 @@ namespace data_loading
 			kraj->setScholarship(vzdelanieKr);
 
 			std::wcout << "Vkladam kraj: " << krCode << "Pocet okresov: " << kraj->countSubUnits() << std::endl;
-			kraje_->insert(krCode, kraj);
+			kraje->insert(krCode, kraj);
 		}
 
 		fileKraje.close();
@@ -247,18 +245,18 @@ namespace data_loading
 		fileZeny.close();
 		fileVzdelanie.close();
 
-		std::wcout << "Poèet obcí: " << obce_->size() << std::endl;
-		std::wcout << "Poèet okresov: " << okresy_->size() << std::endl;
-		std::wcout << "Poèet krajov: " << kraje_->size() << std::endl;
+		std::wcout << "Poèet obcí: " << obce->size() << std::endl;
+		std::wcout << "Poèet okresov: " << okresy->size() << std::endl;
+		std::wcout << "Poèet krajov: " << kraje->size() << std::endl;
 
 		int obyvatelstvo = 0;
-		for (auto kraj2 : *kraje_) {
+		for (auto kraj2 : *kraje) {
 			obyvatelstvo += kraj2->accessData()->countObyvatelstvo();
 		}
 		std::wcout << "Pocet obyvatelov vek: " << obyvatelstvo << std::endl;
 
 		obyvatelstvo = 0;
-		for (auto kraj2 : *kraje_) {
+		for (auto kraj2 : *kraje) {
 			obyvatelstvo += kraj2->accessData()->countObyvatelstvoVzdel();
 		}
 		std::wcout << "Pocet obyvatelov vzdel.: " << obyvatelstvo << std::endl;

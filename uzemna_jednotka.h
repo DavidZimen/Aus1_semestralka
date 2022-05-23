@@ -6,7 +6,6 @@
 
 namespace uzemne_jednotky 
 {
-
 	class UzemnaJednotka 
 	{
 	private:
@@ -17,7 +16,7 @@ namespace uzemne_jednotky
 		std::wstring mediumTitle_;
 		std::wstring shortTitle_;
 
-		structures::ArrayList<UzemnaJednotka*>* subUnits_;
+		structures::ArrayList<uzemne_jednotky::UzemnaJednotka*>* subUnits_;
 		structures::Array<int>* ageMen_;
 		structures::Array<int>* ageWomen_;
 		structures::UnsortedSequenceTable<std::wstring, int>* scholarship_;
@@ -25,7 +24,7 @@ namespace uzemne_jednotky
 		UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle);
 		~UzemnaJednotka();
 
-		void setSubUnits(structures::ArrayList<UzemnaJednotka*>* subUnits);
+		void setSubUnits(structures::ArrayList<uzemne_jednotky::UzemnaJednotka*>* subUnits);
 		void setAgeMen(structures::Array<int>* ageMen);
 		void setAgeWomen(structures::Array<int>* ageWomen);
 		void setScholarship(structures::UnsortedSequenceTable<std::wstring, int>* scholarship);
@@ -62,7 +61,7 @@ namespace uzemne_jednotky
 		scholarship_ = nullptr;
 	}
 
-	inline void UzemnaJednotka::setSubUnits(structures::ArrayList<UzemnaJednotka*>* subUnits)
+	inline void UzemnaJednotka::setSubUnits(structures::ArrayList<uzemne_jednotky::UzemnaJednotka*>* subUnits)
 	{
 		if (subUnits_ == nullptr) {
 			subUnits_ = subUnits;

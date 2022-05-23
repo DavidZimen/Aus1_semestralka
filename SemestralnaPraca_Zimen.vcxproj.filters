@@ -216,6 +216,9 @@
     <ClInclude Include="typ_uj.h">
       <Filter>uzemne_jednotky</Filter>
     </ClInclude>
+    <ClInclude Include="stat.h">
+      <Filter>uzemne_jednotky</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
