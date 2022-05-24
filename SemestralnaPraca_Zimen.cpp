@@ -15,4 +15,6 @@ int main()
     SetConsoleOutputCP(65001);
     auto statP = new uzemne_jednotky::Stat();
     delete statP;
+
+    _CrtDumpMemoryLeaks();
 }

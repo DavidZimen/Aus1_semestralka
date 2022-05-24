@@ -137,6 +137,8 @@ namespace data_loading
 				okresy->insert(okCode, okres);
 				kraj->addSubUnit(okres);
 				okresMimoKraja = nullptr;
+				delete vzdelanieArrOk;
+				vzdelanieArrOk = nullptr;
 			}
 
 			while (okresMimoKraja == nullptr && !fileOkresy.eof()) {
@@ -161,6 +163,8 @@ namespace data_loading
 					obce->insert(obCode, obec);
 					okres->addSubUnit(obec);
 					obecMimoOkresu = nullptr;
+					delete vzdelanieArrOb;
+					vzdelanieArrOb = nullptr;
 				}
 
 				while (obecMimoOkresu == nullptr && !fileObce.eof()) {
@@ -204,6 +208,8 @@ namespace data_loading
 						std::wcout << "Vkladam obec: " << obCode << std::endl;
 						obce->insert(obCode, obec);
 						okres->addSubUnit(obec);
+						delete vzdelanieArrOb;
+						vzdelanieArrOb = nullptr;
 					}
 					else {
 						obecMimoOkresu = obec;
@@ -223,6 +229,8 @@ namespace data_loading
 					std::wcout << "Vkladam okres: " << okCode << std::endl;
 					okresy->insert(okCode, okres);
 					kraj->addSubUnit(okres);
+					delete vzdelanieArrOk;
+					vzdelanieArrOk = nullptr;
 				}
 				else {
 					okresMimoKraja = okres;
@@ -236,6 +244,8 @@ namespace data_loading
 
 			std::wcout << "Vkladam kraj: " << krCode << "Pocet okresov: " << kraj->countSubUnits() << std::endl;
 			kraje->insert(krCode, kraj);
+			delete vzdelanieArrKr;
+			vzdelanieArrKr = nullptr;
 		}
 
 		fileKraje.close();
@@ -260,10 +270,6 @@ namespace data_loading
 			obyvatelstvo += kraj2->accessData()->countObyvatelstvoVzdel();
 		}
 		std::wcout << "Pocet obyvatelov vzdel.: " << obyvatelstvo << std::endl;
-
-		delete vzdelanieArrKr;
-		delete vzdelanieArrOk;
-		delete vzdelanieArrOb;
 
 		std::wcout << "Data successfully loaded." << std::endl;
 	}
