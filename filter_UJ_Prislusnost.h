@@ -4,13 +4,15 @@
 
 namespace filter
 {
-	class FilterUJPrislusnost : public FilterCriterionValue<std::wstring, uj::UzemnaJednotka, bool>
+	template<typename K>
+	class FilterUJPrislusnost : public FilterCriterionValue<K, uj::UzemnaJednotka, bool>
 	{
 	public:
 		FilterUJPrislusnost(bool hodnota, std::wstring vyssiCelok);
 	};
 
-	inline FilterUJPrislusnost::FilterUJPrislusnost(bool hodnota, std::wstring vyssiCelok) :
+	template<typename K>
+	inline FilterUJPrislusnost<K>::FilterUJPrislusnost(bool hodnota, std::wstring vyssiCelok) :
 		FilterCriterionValue<std::wstring, uj::UzemnaJednotka, bool>(new crits::CriterionUJPrislusnost(vyssiCelok), hodnota)
 	{
 	}

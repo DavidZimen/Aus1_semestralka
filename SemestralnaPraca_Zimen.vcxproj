@@ -175,6 +175,11 @@
     <ClInclude Include="Filter_UJ_VzdelaniePocet.h" />
     <ClInclude Include="filter_UJ_VzdelaniePodiel.h" />
     <ClInclude Include="loader.h" />
+    <ClInclude Include="selectionCriterion.h" />
+    <ClInclude Include="selectionCriterion_MAX.h" />
+    <ClInclude Include="selectionCriterion_MIN.h" />
+    <ClInclude Include="selectionCriterion_NajmensiaVekovaSkupina.h" />
+    <ClInclude Include="selectionCriterion_NajvacsiaVekovaSkupina.h" />
     <ClInclude Include="stat.h" />
     <ClInclude Include="structures\array\array.h" />
     <ClInclude Include="structures\data_item.h" />

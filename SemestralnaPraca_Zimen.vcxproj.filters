@@ -50,6 +50,9 @@
     <Filter Include="filters">
       <UniqueIdentifier>{e04a670c-84c9-46e0-a009-d9637ad61bbd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="selection_criterions">
+      <UniqueIdentifier>{113986f3-26f8-480d-a3e8-75101c7b649d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SemestralnaPraca_Zimen.cpp">
@@ -308,6 +311,21 @@
     </ClInclude>
     <ClInclude Include="filter_Composite_OR.h">
       <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="selectionCriterion.h">
+      <Filter>selection_criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="selectionCriterion_MIN.h">
+      <Filter>selection_criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="selectionCriterion_MAX.h">
+      <Filter>selection_criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="selectionCriterion_NajvacsiaVekovaSkupina.h">
+      <Filter>selection_criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="selectionCriterion_NajmensiaVekovaSkupina.h">
+      <Filter>selection_criterions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

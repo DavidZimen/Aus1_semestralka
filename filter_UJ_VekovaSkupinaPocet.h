@@ -4,13 +4,15 @@
 
 namespace filter
 {
-	class FilterUJVekovaSkupinaPocet : public FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, int>
+	template<typename K>
+	class FilterUJVekovaSkupinaPocet : public FilterCriterionInterval<K, uj::UzemnaJednotka, int>
 	{
 	public:
 		FilterUJVekovaSkupinaPocet(std::wstring vekSkupina, int vFrom, int vTo);
 	};
 
-	inline FilterUJVekovaSkupinaPocet::FilterUJVekovaSkupinaPocet(std::wstring vekSkupina, int vFrom, int vTo) :
+	template<typename K>
+	inline FilterUJVekovaSkupinaPocet<K>::FilterUJVekovaSkupinaPocet(std::wstring vekSkupina, int vFrom, int vTo) :
 		FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPocet(vekSkupina), vFrom, vTo)
 	{
 	}

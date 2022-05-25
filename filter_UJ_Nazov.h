@@ -4,13 +4,15 @@
 
 namespace filter
 {
-	class FilterUJNazov : public FilterCriterionValue<std::wstring, uj::UzemnaJednotka, std::wstring>
+	template<typename K>
+	class FilterUJNazov : public FilterCriterionValue<K, uj::UzemnaJednotka, std::wstring>
 	{
 	public:
 		FilterUJNazov(std::wstring nazov);
 	};
 
-	inline FilterUJNazov::FilterUJNazov(std::wstring nazov) :
+	template<typename K>
+	inline FilterUJNazov<K>::FilterUJNazov(std::wstring nazov) :
 		FilterCriterionValue<std::wstring, uj::UzemnaJednotka, std::wstring>(new crits::CriterionUJNazov(), nazov)
 	{
 	}
