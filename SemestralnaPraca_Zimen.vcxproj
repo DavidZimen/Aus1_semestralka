@@ -180,6 +180,7 @@
     <ClInclude Include="selectionCriterion_MIN.h" />
     <ClInclude Include="selectionCriterion_NajmensiaVekovaSkupina.h" />
     <ClInclude Include="selectionCriterion_NajvacsiaVekovaSkupina.h" />
+    <ClInclude Include="quickSorter.h" />
     <ClInclude Include="stat.h" />
     <ClInclude Include="structures\array\array.h" />
     <ClInclude Include="structures\data_item.h" />

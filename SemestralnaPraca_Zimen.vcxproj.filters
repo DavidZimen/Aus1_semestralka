@@ -53,6 +53,9 @@
     <Filter Include="selection_criterions">
       <UniqueIdentifier>{113986f3-26f8-480d-a3e8-75101c7b649d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sorting">
+      <UniqueIdentifier>{e6fd9ae9-5847-4f1c-9e70-24c82fb7cd56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SemestralnaPraca_Zimen.cpp">
@@ -326,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="selectionCriterion_NajmensiaVekovaSkupina.h">
       <Filter>selection_criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="quickSorter.h">
+      <Filter>sorting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
