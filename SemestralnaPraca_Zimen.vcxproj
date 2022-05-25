@@ -146,6 +146,34 @@
     <ClCompile Include="structures\vector\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="criterion.h" />
+    <ClInclude Include="criterion_Uj.h" />
+    <ClInclude Include="criterion_UJ_Nadradena.h" />
+    <ClInclude Include="criterion_UJ_Nazov.h" />
+    <ClInclude Include="criterion_UJ_Prislusnost.h" />
+    <ClInclude Include="criterion_UJ_Typ.h" />
+    <ClInclude Include="criterion_UJ_VekovaSkupinaPocet.h" />
+    <ClInclude Include="criterion_UJ_VekovaSkupinaPodiel.h" />
+    <ClInclude Include="criterion_UJ_VekPocet.h" />
+    <ClInclude Include="criterion_UJ_VekPodiel.h" />
+    <ClInclude Include="criterion_UJ_VzdelaniePocet.h" />
+    <ClInclude Include="criterion_UJ_VzdelaniePodiel.h" />
+    <ClInclude Include="filter.h" />
+    <ClInclude Include="filter_Composite.h" />
+    <ClInclude Include="filter_Composite_AND.h" />
+    <ClInclude Include="filter_Composite_OR.h" />
+    <ClInclude Include="filter_Criterion.h" />
+    <ClInclude Include="filter_Criterion_Interval.h" />
+    <ClInclude Include="filter_Criterion_Value.h" />
+    <ClInclude Include="filter_UJ_Nazov.h" />
+    <ClInclude Include="filter_UJ_Prislusnost.h" />
+    <ClInclude Include="filter_UJ_Typ.h" />
+    <ClInclude Include="filter_UJ_VekovaSkupinaPocet.h" />
+    <ClInclude Include="filter_UJ_VekovaSkupinaPodiel.h" />
+    <ClInclude Include="filter_UJ_VekPocet.h" />
+    <ClInclude Include="filter_UJ_VekPodiel.h" />
+    <ClInclude Include="Filter_UJ_VzdelaniePocet.h" />
+    <ClInclude Include="filter_UJ_VzdelaniePodiel.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="stat.h" />
     <ClInclude Include="structures\array\array.h" />

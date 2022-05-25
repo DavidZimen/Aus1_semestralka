@@ -44,6 +44,12 @@
     <Filter Include="data_loading">
       <UniqueIdentifier>{fa1194c1-d713-4ee4-b524-10e0c7848f75}</UniqueIdentifier>
     </Filter>
+    <Filter Include="criterions">
+      <UniqueIdentifier>{ad917179-b43b-4c97-a846-aa6afca3d14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="filters">
+      <UniqueIdentifier>{e04a670c-84c9-46e0-a009-d9637ad61bbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SemestralnaPraca_Zimen.cpp">
@@ -218,6 +224,90 @@
     </ClInclude>
     <ClInclude Include="stat.h">
       <Filter>uzemne_jednotky</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_Uj.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_Nazov.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_Typ.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_Prislusnost.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VzdelaniePocet.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VzdelaniePodiel.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VekPocet.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VekPodiel.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VekovaSkupinaPocet.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_VekovaSkupinaPodiel.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="criterion_UJ_Nadradena.h">
+      <Filter>criterions</Filter>
+    </ClInclude>
+    <ClInclude Include="filter.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Criterion.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Criterion_Value.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Criterion_Interval.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_Nazov.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_Typ.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_Prislusnost.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="Filter_UJ_VzdelaniePocet.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_VzdelaniePodiel.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_VekPocet.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_VekPodiel.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_VekovaSkupinaPocet.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_UJ_VekovaSkupinaPodiel.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Composite.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Composite_AND.h">
+      <Filter>filters</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_Composite_OR.h">
+      <Filter>filters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

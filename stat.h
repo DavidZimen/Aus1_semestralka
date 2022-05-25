@@ -10,47 +10,54 @@
 #include "typ_uj.h"
 #include "loader.h"
 
-namespace uzemne_jednotky
+namespace uj
 {
 	class Stat
 	{
 	private:
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje_;
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy_;
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* krajeS_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresyS_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obceS_;
+
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* krajeU_;
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresyU_;
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obceU_;
 	public:
 		Stat();
 		~Stat();
 	};
 
 	inline Stat::Stat() :
-		kraje_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>()),
-		okresy_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>()),
-		obce_(new structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>())
+		krajeS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		okresyS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		obceS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		krajeU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		okresyU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		obceU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>())
 	{
-		data_loading::Loader::getInstance().LoadData(kraje_, okresy_, obce_);
+		data_loading::Loader::getInstance().LoadData(krajeS_, okresyS_, obceS_);
 	}
 
 	inline Stat::~Stat()
 	{
-		for (auto obec : *obce_) {
+		for (auto obec : *obceS_) {
 			delete obec->accessData();
 		}
 
-		for (auto okres : *okresy_) {
+		for (auto okres : *okresyS_) {
 			delete okres->accessData();
 		}
 
-		for (auto kraj : *kraje_) {
+		for (auto kraj : *krajeS_) {
 			delete kraj->accessData();
 		}
 
-		delete kraje_;
-		delete okresy_;
-		delete obce_;
+		delete krajeS_;
+		delete okresyS_;
+		delete obceS_;
 
-		kraje_ = nullptr;
-		okresy_ = nullptr;
-		obce_ = nullptr;
+		krajeS_ = nullptr;
+		okresyS_ = nullptr;
+		obceS_ = nullptr;
 	}
 }

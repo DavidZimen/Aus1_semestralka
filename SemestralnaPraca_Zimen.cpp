@@ -13,7 +13,7 @@
 int main()
 {
     SetConsoleOutputCP(65001);
-    auto statP = new uzemne_jednotky::Stat();
+    auto statP = new uj::Stat();
     delete statP;
 
     _CrtDumpMemoryLeaks();

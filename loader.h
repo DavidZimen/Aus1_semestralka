@@ -20,9 +20,9 @@ namespace data_loading
 		static Loader& getInstance();
 
 	public:
-		void LoadData(structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje,
-			structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy,
-			structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce);
+		void LoadData(structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* kraje,
+			structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresy,
+			structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obce);
 		void parseLine(std::wstring& pLine, structures::Array<int>* pArray);
 		void toScholarshipTable(structures::Array<int>* scholArray, structures::UnsortedSequenceTable<std::wstring, int>* scholTable);
 		int findAndMove(std::wstring& line, int& iDel, int& iSubstr);
@@ -40,9 +40,9 @@ namespace data_loading
 		return instance;
 	}
 
-	inline void Loader::LoadData(structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* kraje,
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* okresy,
-		structures::SortedSequenceTable<std::wstring, uzemne_jednotky::UzemnaJednotka*>* obce)
+	inline void Loader::LoadData(structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* kraje,
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresy,
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obce)
 	{
 		std::wcout << "Starting loading..." << std::endl;
 
@@ -85,9 +85,9 @@ namespace data_loading
 		std::wstring obCode, obOfficialTitle, obMediumTitle, obShortTitle, lineAge, lineSchool = L"";
 
 		//premenne na vytvorenie uzemnej jednotky po nacitani prislusnych hodnot zo suboru
-		uzemne_jednotky::UzemnaJednotka* kraj = nullptr;
-		uzemne_jednotky::UzemnaJednotka* okres = nullptr;
-		uzemne_jednotky::UzemnaJednotka* obec = nullptr;
+		uj::UzemnaJednotka* kraj = nullptr;
+		uj::UzemnaJednotka* okres = nullptr;
+		uj::UzemnaJednotka* obec = nullptr;
 
 		//pomocne struktury na informacie pre kraj 
 		structures::Array<int>* vekMuziKr = nullptr;
@@ -108,8 +108,8 @@ namespace data_loading
 		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanieOb = nullptr;
 
 		//uchovanie uj, ktora uz je mimo daneho kraja, aby nedoslo ku strate dat
-		uzemne_jednotky::UzemnaJednotka* okresMimoKraja = nullptr;
-		uzemne_jednotky::UzemnaJednotka* obecMimoOkresu = nullptr;
+		uj::UzemnaJednotka* okresMimoKraja = nullptr;
+		uj::UzemnaJednotka* obecMimoOkresu = nullptr;
 
 		while (!fileKraje.eof()) {
 			vekMuziKr = new structures::Array<int>(101);
@@ -121,8 +121,8 @@ namespace data_loading
 			std::getline(fileKraje, krOfficialTitle, delimeter_);
 			std::getline(fileKraje, krShortTitle, eolChar_);
 
-			kraj = new uzemne_jednotky::UzemnaJednotka(uzemne_jednotky::TypUzemJednotka::KRAJ, krCode, krOfficialTitle, krOfficialTitle, krShortTitle);
-			kraj->setSubUnits(new structures::ArrayList<uzemne_jednotky::UzemnaJednotka*>());
+			kraj = new uj::UzemnaJednotka(uj::TypUzemJednotka::KRAJ, krCode, krOfficialTitle, krOfficialTitle, krShortTitle);
+			kraj->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
 			std::wstring toCompareKr = krCode.substr(5, 5);
 			if (toCompareKr == L"*****") {
 				toCompareKr = L"SKZZZ";
@@ -151,8 +151,8 @@ namespace data_loading
 				std::getline(fileOkresy, okOfficialTitle, delimeter_);
 				std::getline(fileOkresy, okShortTitle, eolChar_);
 
-				okres = new uzemne_jednotky::UzemnaJednotka(uzemne_jednotky::TypUzemJednotka::OKRES, okCode, okOfficialTitle, okOfficialTitle, okShortTitle);
-				okres->setSubUnits(new structures::ArrayList<uzemne_jednotky::UzemnaJednotka*>());
+				okres = new uj::UzemnaJednotka(uj::TypUzemJednotka::OKRES, okCode, okOfficialTitle, okOfficialTitle, okShortTitle, kraj);
+				okres->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
 
 				if (obecMimoOkresu != nullptr) {
 					addToSupUnit(vekMuziOk, vekMuziOb);
@@ -178,7 +178,7 @@ namespace data_loading
 					std::getline(fileObce, obMediumTitle, delimeter_);
 					std::getline(fileObce, obShortTitle, eolChar_);
 
-					obec = new uzemne_jednotky::UzemnaJednotka(uzemne_jednotky::TypUzemJednotka::OBEC, obCode, obOfficialTitle, obMediumTitle, obShortTitle);
+					obec = new uj::UzemnaJednotka(uj::TypUzemJednotka::OBEC, obCode, obOfficialTitle, obMediumTitle, obShortTitle, okres);
 
 					//odstrani prve dva stlpce, kedze su nepotrebne
 					std::getline(fileMuzi, toThrow, delimeter_);
@@ -242,7 +242,7 @@ namespace data_loading
 			toScholarshipTable(vzdelanieArrKr, vzdelanieKr);
 			kraj->setScholarship(vzdelanieKr);
 
-			std::wcout << "Vkladam kraj: " << krCode << "Pocet okresov: " << kraj->countSubUnits() << std::endl;
+			std::wcout << "Vkladam kraj: " << krCode << "Pocet okresov: " << std::endl;
 			kraje->insert(krCode, kraj);
 			delete vzdelanieArrKr;
 			vzdelanieArrKr = nullptr;
@@ -261,13 +261,13 @@ namespace data_loading
 
 		int obyvatelstvo = 0;
 		for (auto kraj2 : *kraje) {
-			obyvatelstvo += kraj2->accessData()->countObyvatelstvo();
+			obyvatelstvo += kraj2->accessData()->getPocetObyvatelov();
 		}
 		std::wcout << "Pocet obyvatelov vek: " << obyvatelstvo << std::endl;
 
 		obyvatelstvo = 0;
 		for (auto kraj2 : *kraje) {
-			obyvatelstvo += kraj2->accessData()->countObyvatelstvoVzdel();
+			obyvatelstvo += kraj2->accessData()->getPocetObyvatelov();
 		}
 		std::wcout << "Pocet obyvatelov vzdel.: " << obyvatelstvo << std::endl;
 

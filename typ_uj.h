@@ -1,6 +1,6 @@
 #pragma once
 
-namespace uzemne_jednotky
+namespace uj
 {
 	enum class TypUzemJednotka
 	{
