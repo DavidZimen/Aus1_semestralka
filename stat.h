@@ -12,12 +12,12 @@
 
 namespace uj
 {
-	class Stat
+	class Stat : public UzemnaJednotka
 	{
 	private:
-		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* krajeS_;
-		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresyS_;
-		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obceS_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* kraje_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresy_;
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obce_;
 
 		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* krajeU_;
 		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresyU_;
@@ -25,39 +25,56 @@ namespace uj
 	public:
 		Stat();
 		~Stat();
+
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getKraje() { return kraje_; };
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getOkresy() { return okresy_; };
+		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getObce() { return obce_; };
+
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getKrajeU() { return krajeU_; };
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getOkresyU() { return okresyU_; };
+		structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* getObceU() { return obceU_; };
+
 	};
 
 	inline Stat::Stat() :
-		krajeS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
-		okresyS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
-		obceS_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		UzemnaJednotka(TypUzemJednotka::STAT, L"SK", L"Slovenská republika", L"Slovensko", L"Slovensko"),
+		kraje_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		okresy_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
+		obce_(new structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
 		krajeU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
 		okresyU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>()),
 		obceU_(new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>())
 	{
-		data_loading::Loader::getInstance().LoadData(krajeS_, okresyS_, obceS_);
 	}
 
 	inline Stat::~Stat()
 	{
-		for (auto obec : *obceS_) {
+		for (auto obec : *obceU_) {
 			delete obec->accessData();
 		}
 
-		for (auto okres : *okresyS_) {
+		for (auto okres : *okresyU_) {
 			delete okres->accessData();
 		}
 
-		for (auto kraj : *krajeS_) {
+		for (auto kraj : *krajeU_) {
 			delete kraj->accessData();
 		}
 
-		delete krajeS_;
-		delete okresyS_;
-		delete obceS_;
+		delete krajeU_;
+		delete okresyU_;
+		delete obceU_;
 
-		krajeS_ = nullptr;
-		okresyS_ = nullptr;
-		obceS_ = nullptr;
+		delete kraje_;
+		delete okresy_;
+		delete obce_;
+
+		krajeU_ = nullptr;
+		okresyU_ = nullptr;
+		obceU_ = nullptr;
+
+		kraje_ = nullptr;
+		okresy_ = nullptr;
+		obce_ = nullptr;
 	}
 }

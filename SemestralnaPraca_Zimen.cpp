@@ -12,8 +12,10 @@
 
 int main()
 {
-    SetConsoleOutputCP(65001);
-    auto statP = new uj::Stat();
+    SetConsoleOutputCP(1250);
+    SetConsoleCP(1250);
+    setlocale(LC_ALL, "slovak");
+    auto statP = data_loading::Loader::getInstance().LoadData();
     delete statP;
 
     _CrtDumpMemoryLeaks();

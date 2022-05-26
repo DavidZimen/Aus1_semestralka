@@ -18,14 +18,14 @@ namespace uj
 		std::wstring shortTitle_;
 
 		structures::ArrayList<uj::UzemnaJednotka*>* subUnits_;
-		structures::Array<int>* ageMen_;
-		structures::Array<int>* ageWomen_;
-		structures::UnsortedSequenceTable<std::wstring, int>* scholarship_;
+		structures::Array<int>* vekMuzi;
+		structures::Array<int>* vekZeny_;
+		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanie_;
 	public:
 		UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle);
-		UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle, UzemnaJednotka* nadradena);
 		~UzemnaJednotka();
 
+		void setNadradena(UzemnaJednotka* nadradena);
 		void setSubUnits(structures::ArrayList<uj::UzemnaJednotka*>* subUnits);
 		void setAgeMen(structures::Array<int>* ageMen);
 		void setAgeWomen(structures::Array<int>* ageWomen);
@@ -42,6 +42,8 @@ namespace uj
 		int pocetObyvatelovSoVzdelanim(std::wstring vzdelanie);
 		int pocetObyvatelovSDanymVekomAPohlavim(int vek, std::wstring pohlavie);
 		int pocetObyvatelovVDanejVekovejSkupine(std::wstring vekSkupina);
+
+		void vypis();
 	};
 
 	inline UzemnaJednotka::UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle) :
@@ -53,28 +55,29 @@ namespace uj
 		nadradena_(nullptr)
 	{
 		subUnits_ = nullptr;
-		ageMen_ = nullptr;
-		ageWomen_ = nullptr;
-		scholarship_ = nullptr;
-	}
-
-	inline UzemnaJednotka::UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle, UzemnaJednotka* nadradena) :
-		UzemnaJednotka(typ, code, officialTitle, mediumTitle, shortTitle)
-	{
-		nadradena_ = nadradena;
+		vekMuzi = nullptr;
+		vekZeny_ = nullptr;
+		vzdelanie_ = nullptr;
 	}
 
 	inline UzemnaJednotka::~UzemnaJednotka()
 	{
 		delete subUnits_;
-		delete ageMen_;
-		delete ageWomen_;
-		delete scholarship_;
+		delete vekMuzi;
+		delete vekZeny_;
+		delete vzdelanie_;
 
 		subUnits_ = nullptr;
-		ageMen_ = nullptr;
-		ageWomen_ = nullptr;
-		scholarship_ = nullptr;
+		vekMuzi = nullptr;
+		vekZeny_ = nullptr;
+		vzdelanie_ = nullptr;
+	}
+
+	inline void UzemnaJednotka::setNadradena(UzemnaJednotka* nadradena)
+	{
+		if (nadradena_ == nullptr) {
+			nadradena_ = nadradena;
+		}
 	}
 
 	inline void UzemnaJednotka::setSubUnits(structures::ArrayList<uj::UzemnaJednotka*>* subUnits)
@@ -86,22 +89,22 @@ namespace uj
 
 	inline void UzemnaJednotka::setAgeMen(structures::Array<int>* ageMen)
 	{
-		if (ageMen_ == nullptr) {
-			ageMen_ = ageMen;
+		if (vekMuzi == nullptr) {
+			vekMuzi = ageMen;
 		}
 	}
 
 	inline void UzemnaJednotka::setAgeWomen(structures::Array<int>* ageWomen)
 	{
-		if (ageWomen_ == nullptr) {
-			ageWomen_ = ageWomen;
+		if (vekZeny_ == nullptr) {
+			vekZeny_ = ageWomen;
 		}
 	}
 
 	inline void UzemnaJednotka::setScholarship(structures::UnsortedSequenceTable<std::wstring, int>* scholarship)
 	{
-		if (scholarship_ == nullptr) {
-			scholarship_ = scholarship;
+		if (vzdelanie_ == nullptr) {
+			vzdelanie_ = scholarship;
 		}
 	}
 
@@ -114,8 +117,8 @@ namespace uj
 	{
 		int result = 0;
 		for (int i = vekOd; i <= vekDo; i++) {
-			result += ageMen_->at(i);
-			result += ageWomen_->at(i);
+			result += vekMuzi->at(i);
+			result += vekZeny_->at(i);
 		}
 		return result;
 	}
@@ -123,7 +126,7 @@ namespace uj
 	inline int UzemnaJednotka::getPocetObyvatelov()
 	{
 		int result = 0;
-		for (auto item : *scholarship_) {
+		for (auto item : *vzdelanie_) {
 			result += item->accessData();
 		}
 
@@ -145,16 +148,16 @@ namespace uj
 
 	inline int UzemnaJednotka::pocetObyvatelovSoVzdelanim(std::wstring vzdelanie)
 	{
-		return scholarship_->find(vzdelanie);
+		return vzdelanie_->find(vzdelanie);
 	}
 
 	inline int UzemnaJednotka::pocetObyvatelovSDanymVekomAPohlavim(int vek, std::wstring pohlavie)
 	{
 		if (pohlavie == L"muž") {
-			return ageMen_->at(vek);
+			return vekMuzi->at(vek);
 		}
 		else if (pohlavie == L"žena") {
-			return ageWomen_->at(vek);
+			return vekZeny_->at(vek);
 		}
 		else {
 			return -1;
@@ -174,6 +177,13 @@ namespace uj
 		}
 		else {
 			return -1;
+		}
+	}
+
+	inline void UzemnaJednotka::vypis()
+	{
+		if (nadradena_ != nullptr) {
+			std::wcout << shortTitle_ << L" " << getPocetObyvatelov() << L" " << nadradena_->getNazov() << std::endl;
 		}
 	}
 }

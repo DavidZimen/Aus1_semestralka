@@ -7,6 +7,8 @@
 #include "../SemestralnaPraca_Zimen/structures/array/array.h"
 #include "uzemna_jednotka.h"
 #include "typ_uj.h"
+#include "stat.h"
+
 
 namespace data_loading
 {
@@ -20,9 +22,8 @@ namespace data_loading
 		static Loader& getInstance();
 
 	public:
-		void LoadData(structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* kraje,
-			structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresy,
-			structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obce);
+		uj::Stat* LoadData();
+
 		void parseLine(std::wstring& pLine, structures::Array<int>* pArray);
 		void toScholarshipTable(structures::Array<int>* scholArray, structures::UnsortedSequenceTable<std::wstring, int>* scholTable);
 		int findAndMove(std::wstring& line, int& iDel, int& iSubstr);
@@ -40,9 +41,7 @@ namespace data_loading
 		return instance;
 	}
 
-	inline void Loader::LoadData(structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* kraje,
-		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* okresy,
-		structures::SortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* obce)
+	inline uj::Stat* Loader::LoadData()
 	{
 		std::wcout << "Starting loading..." << std::endl;
 
@@ -65,7 +64,7 @@ namespace data_loading
 		//otvorenie kazdeho suboru
 		fileKraje.open("../SemestralnaPraca_Zimen/data/kraje.csv");
 		fileOkresy.open("../SemestralnaPraca_Zimen/data/okresy.csv");
-		fileObce.open("../SemestralnaPraca_Zimen/data/obce.csv");
+		fileObce.open("../SemestralnaPraca_Zimen/data/obce_1.csv");
 		fileMuzi.open("../SemestralnaPraca_Zimen/data/vek_muzi.csv");
 		fileZeny.open("../SemestralnaPraca_Zimen/data/vek_zeny.csv");
 		fileVzdelanie.open("../SemestralnaPraca_Zimen/data/vzdelanie.csv");
@@ -84,10 +83,25 @@ namespace data_loading
 		std::wstring okCode, okOfficialTitle, okShortTitle = L"";
 		std::wstring obCode, obOfficialTitle, obMediumTitle, obShortTitle, lineAge, lineSchool = L"";
 
+		//vytvorenie statu a prebranie jeho zoznamov na naplnenie datami
+		uj::Stat* stat = new uj::Stat();
+		auto kraje = stat->getKraje();
+		auto okresy = stat->getOkresy();
+		auto obce = stat->getObce();
+		auto krajeU = stat->getKrajeU();
+		auto okresyU = stat->getOkresyU();
+		auto obceU = stat->getObceU();
+
 		//premenne na vytvorenie uzemnej jednotky po nacitani prislusnych hodnot zo suboru
 		uj::UzemnaJednotka* kraj = nullptr;
 		uj::UzemnaJednotka* okres = nullptr;
 		uj::UzemnaJednotka* obec = nullptr;
+
+		//pomocne struktury na informacie pre stat
+		structures::Array<int>* vekMuziSt = new structures::Array<int>(101);
+		structures::Array<int>* vekZenySt = new structures::Array<int>(101);
+		structures::Array<int>* vzdelanieArrSt = new structures::Array<int>(8);
+		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanieSt = new structures::UnsortedSequenceTable<std::wstring, int>();
 
 		//pomocne struktury na informacie pre kraj 
 		structures::Array<int>* vekMuziKr = nullptr;
@@ -132,13 +146,13 @@ namespace data_loading
 				addToSupUnit(vekMuziKr, vekMuziOk);
 				addToSupUnit(vekZenyKr, vekZenyOk);
 				addToSupUnit(vzdelanieArrKr, vzdelanieArrOk);
+				okres->setNadradena(kraj);
 
-				std::wcout << "Vkladam okres: " << okCode << std::endl;
-				okresy->insert(okCode, okres);
+				okresyU->insert(okCode, okres);
+				okresy->insert(okShortTitle, okres);
 				kraj->addSubUnit(okres);
 				okresMimoKraja = nullptr;
 				delete vzdelanieArrOk;
-				vzdelanieArrOk = nullptr;
 			}
 
 			while (okresMimoKraja == nullptr && !fileOkresy.eof()) {
@@ -151,20 +165,22 @@ namespace data_loading
 				std::getline(fileOkresy, okOfficialTitle, delimeter_);
 				std::getline(fileOkresy, okShortTitle, eolChar_);
 
-				okres = new uj::UzemnaJednotka(uj::TypUzemJednotka::OKRES, okCode, okOfficialTitle, okOfficialTitle, okShortTitle, kraj);
+				okres = new uj::UzemnaJednotka(uj::TypUzemJednotka::OKRES, okCode, okOfficialTitle, okOfficialTitle, okShortTitle);
 				okres->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
 
 				if (obecMimoOkresu != nullptr) {
 					addToSupUnit(vekMuziOk, vekMuziOb);
 					addToSupUnit(vekZenyOk, vekZenyOb);
 					addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
+					obec->setNadradena(okres);
 
-					std::wcout << "Vkladam obec: " << obCode << std::endl;
-					obce->insert(obCode, obec);
+					obec->vypis();
+
+					obceU->insert(obCode, obec);
+					obce->insert(obMediumTitle, obec);
 					okres->addSubUnit(obec);
 					obecMimoOkresu = nullptr;
 					delete vzdelanieArrOb;
-					vzdelanieArrOb = nullptr;
 				}
 
 				while (obecMimoOkresu == nullptr && !fileObce.eof()) {
@@ -178,7 +194,7 @@ namespace data_loading
 					std::getline(fileObce, obMediumTitle, delimeter_);
 					std::getline(fileObce, obShortTitle, eolChar_);
 
-					obec = new uj::UzemnaJednotka(uj::TypUzemJednotka::OBEC, obCode, obOfficialTitle, obMediumTitle, obShortTitle, okres);
+					obec = new uj::UzemnaJednotka(uj::TypUzemJednotka::OBEC, obCode, obOfficialTitle, obMediumTitle, obShortTitle);
 
 					//odstrani prve dva stlpce, kedze su nepotrebne
 					std::getline(fileMuzi, toThrow, delimeter_);
@@ -204,12 +220,14 @@ namespace data_loading
 						addToSupUnit(vekMuziOk, vekMuziOb);
 						addToSupUnit(vekZenyOk, vekZenyOb);
 						addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
+						obec->setNadradena(okres);
 
-						std::wcout << "Vkladam obec: " << obCode << std::endl;
-						obce->insert(obCode, obec);
+						obec->vypis();
+
+						obceU->insert(obCode, obec);
+						obce->insert(obMediumTitle, obec);
 						okres->addSubUnit(obec);
 						delete vzdelanieArrOb;
-						vzdelanieArrOb = nullptr;
 					}
 					else {
 						obecMimoOkresu = obec;
@@ -225,12 +243,12 @@ namespace data_loading
 					addToSupUnit(vekMuziKr, vekMuziOk);
 					addToSupUnit(vekZenyKr, vekZenyOk);
 					addToSupUnit(vzdelanieArrKr, vzdelanieArrOk);
+					okres->setNadradena(kraj);
 
-					std::wcout << "Vkladam okres: " << okCode << std::endl;
-					okresy->insert(okCode, okres);
+					okresyU->insert(okCode, okres);
+					okresy->insert(okShortTitle, okres);
 					kraj->addSubUnit(okres);
 					delete vzdelanieArrOk;
-					vzdelanieArrOk = nullptr;
 				}
 				else {
 					okresMimoKraja = okres;
@@ -242,11 +260,21 @@ namespace data_loading
 			toScholarshipTable(vzdelanieArrKr, vzdelanieKr);
 			kraj->setScholarship(vzdelanieKr);
 
-			std::wcout << "Vkladam kraj: " << krCode << "Pocet okresov: " << std::endl;
-			kraje->insert(krCode, kraj);
+			addToSupUnit(vekMuziSt, vekMuziKr);
+			addToSupUnit(vekZenySt, vekZenyKr);
+			addToSupUnit(vzdelanieArrSt, vzdelanieArrKr);
+			kraj->setNadradena(stat);
+
+			krajeU->insert(krCode, kraj);
+			kraje->insert(krShortTitle, kraj);
 			delete vzdelanieArrKr;
-			vzdelanieArrKr = nullptr;
 		}
+
+		stat->setAgeMen(vekMuziSt);
+		stat->setAgeWomen(vekZenySt);
+		toScholarshipTable(vzdelanieArrSt, vzdelanieSt);
+		stat->setScholarship(vzdelanieSt);
+		delete vzdelanieArrSt;
 
 		fileKraje.close();
 		fileOkresy.close();
@@ -255,23 +283,10 @@ namespace data_loading
 		fileZeny.close();
 		fileVzdelanie.close();
 
-		std::wcout << "Poèet obcí: " << obce->size() << std::endl;
-		std::wcout << "Poèet okresov: " << okresy->size() << std::endl;
-		std::wcout << "Poèet krajov: " << kraje->size() << std::endl;
-
-		int obyvatelstvo = 0;
-		for (auto kraj2 : *kraje) {
-			obyvatelstvo += kraj2->accessData()->getPocetObyvatelov();
-		}
-		std::wcout << "Pocet obyvatelov vek: " << obyvatelstvo << std::endl;
-
-		obyvatelstvo = 0;
-		for (auto kraj2 : *kraje) {
-			obyvatelstvo += kraj2->accessData()->getPocetObyvatelov();
-		}
-		std::wcout << "Pocet obyvatelov vzdel.: " << obyvatelstvo << std::endl;
-
+		std::wcout << stat->getPocetObyvatelov() << std::endl;;
 		std::wcout << "Data successfully loaded." << std::endl;
+
+		return stat;
 	}
 
 	inline void Loader::parseLine(std::wstring& pLine, structures::Array<int>* pArray)
