@@ -44,6 +44,9 @@
     <Filter Include="sorting">
       <UniqueIdentifier>{e6fd9ae9-5847-4f1c-9e70-24c82fb7cd56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="functionalities">
+      <UniqueIdentifier>{ae9702d5-2120-40fb-b7db-30345ce1c7da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SemestralnaPraca_Zimen.cpp">
@@ -227,6 +230,15 @@
     </ClInclude>
     <ClInclude Include="quickSorter.h">
       <Filter>sorting</Filter>
+    </ClInclude>
+    <ClInclude Include="funcionality.h">
+      <Filter>functionalities</Filter>
+    </ClInclude>
+    <ClInclude Include="bodove_Vyhladavanie.h">
+      <Filter>functionalities</Filter>
+    </ClInclude>
+    <ClInclude Include="filtrovanie.h">
+      <Filter>functionalities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

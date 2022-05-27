@@ -13,7 +13,7 @@ namespace filter
 
 	template<typename K>
 	inline FilterUJVekovaSkupinaPodiel<K>::FilterUJVekovaSkupinaPodiel(std::wstring vekSkupina, double vFrom, double vTo) :
-		FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPodiel(vekSkupina), vFrom, vTo)
+		FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, double>(new crits::CriterionUJVekovaSkupinaPodiel(vekSkupina), vFrom, vTo)
 	{
 	}
 }

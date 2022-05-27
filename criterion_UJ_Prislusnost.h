@@ -16,6 +16,7 @@ namespace crits
 		vyssiCelok_(vyssiCelok)
 	{
 	}
+
 	inline bool CriterionUJPrislusnost::evaluate(uj::UzemnaJednotka& o)
 	{
 		return o.patriDoVyssiehoCelku(vyssiCelok_);

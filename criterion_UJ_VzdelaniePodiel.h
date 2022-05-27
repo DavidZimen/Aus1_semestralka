@@ -17,6 +17,7 @@ namespace crits
 		vzdelanie_(vzdelanie)
 	{
 	}
+
 	inline double CriterionUJVzdelaniePodiel::evaluate(uj::UzemnaJednotka& o)
 	{
 		return 100.0 * (static_cast<double>(CriterionUJVzdelaniePocet(vzdelanie_).evaluate(o)) / static_cast<double>(o.getPocetObyvatelov()));

@@ -33,7 +33,7 @@ namespace uj
 		void addSubUnit(UzemnaJednotka* subUnit);
 		int spocitajVekSkupinu(int vekOd, int vekDo);
 
-		std::wstring& getNazov() { return shortTitle_; };
+		std::wstring& getNazov() { return mediumTitle_; };
 		UzemnaJednotka* getNadradena() { return nadradena_; };
 		TypUzemJednotka getTyp() { return typ_; };
 		int getPocetObyvatelov();
@@ -44,6 +44,7 @@ namespace uj
 		int pocetObyvatelovVDanejVekovejSkupine(std::wstring vekSkupina);
 
 		void vypis();
+		void vypisSubunits();
 	};
 
 	inline UzemnaJednotka::UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle) :
@@ -183,7 +184,25 @@ namespace uj
 	inline void UzemnaJednotka::vypis()
 	{
 		if (nadradena_ != nullptr) {
-			std::wcout << shortTitle_ << L" " << getPocetObyvatelov() << L" " << nadradena_->getNazov() << std::endl;
+			std::wcout << mediumTitle_ << L" " << getPocetObyvatelov() << L" " << std::endl;
+		}
+	}
+
+	inline void UzemnaJednotka::vypisSubunits()
+	{
+		switch (typ_) {
+			case TypUzemJednotka::OBEC:
+				std::wcout << L"" << '\n';
+				break;
+			case TypUzemJednotka::OKRES:
+				std::wcout << L"Poèet obcí: " << subUnits_->size() << '\n';
+				break;
+			case TypUzemJednotka::KRAJ:
+				std::wcout << L"Poèet okresov: " << subUnits_->size() << '\n';
+				break;
+			case TypUzemJednotka::STAT:
+				std::wcout << L"Poèet krajov: " << subUnits_->size() << '\n';
+				break;
 		}
 	}
 }

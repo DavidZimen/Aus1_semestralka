@@ -7,19 +7,24 @@ namespace filter
 	class FilterCompositeAND : public FilterComposite<K, Object>
 	{
 	public:
-		bool pass(const Object& o) override;
+		bool pass(Object& o) override;
 	};
 
 	template<typename K, typename Object>
-	inline bool FilterCompositeAND<K, Object>::pass(const Object& o)
+	inline bool FilterCompositeAND<K, Object>::pass(Object& o)
 	{
 		int passed = 0;
-		for (auto filter : filters_) {
+		for (auto filter : *FilterComposite<K, Object>::filters_) {
 			if (filter->pass(o)) {
-				passed++
+				passed++;
 			}
 		}
 
-		passed == filters_.size() ? return true : return false;
+		if (passed == FilterComposite<K, Object>::filters_->size()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

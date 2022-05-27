@@ -149,7 +149,7 @@ namespace data_loading
 				okres->setNadradena(kraj);
 
 				okresyU->insert(okCode, okres);
-				okresy->insert(okShortTitle, okres);
+				okresy->insert(okOfficialTitle, okres);
 				kraj->addSubUnit(okres);
 				okresMimoKraja = nullptr;
 				delete vzdelanieArrOk;
@@ -173,8 +173,6 @@ namespace data_loading
 					addToSupUnit(vekZenyOk, vekZenyOb);
 					addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
 					obec->setNadradena(okres);
-
-					obec->vypis();
 
 					obceU->insert(obCode, obec);
 					obce->insert(obMediumTitle, obec);
@@ -222,7 +220,6 @@ namespace data_loading
 						addToSupUnit(vzdelanieArrOk, vzdelanieArrOb);
 						obec->setNadradena(okres);
 
-						obec->vypis();
 
 						obceU->insert(obCode, obec);
 						obce->insert(obMediumTitle, obec);
@@ -246,7 +243,7 @@ namespace data_loading
 					okres->setNadradena(kraj);
 
 					okresyU->insert(okCode, okres);
-					okresy->insert(okShortTitle, okres);
+					okresy->insert(okOfficialTitle, okres);
 					kraj->addSubUnit(okres);
 					delete vzdelanieArrOk;
 				}
@@ -266,7 +263,7 @@ namespace data_loading
 			kraj->setNadradena(stat);
 
 			krajeU->insert(krCode, kraj);
-			kraje->insert(krShortTitle, kraj);
+			kraje->insert(krOfficialTitle, kraj);
 			delete vzdelanieArrKr;
 		}
 
@@ -283,7 +280,6 @@ namespace data_loading
 		fileZeny.close();
 		fileVzdelanie.close();
 
-		std::wcout << stat->getPocetObyvatelov() << std::endl;;
 		std::wcout << "Data successfully loaded." << std::endl;
 
 		return stat;

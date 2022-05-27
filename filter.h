@@ -8,6 +8,7 @@ namespace filter
 	class Filter
 	{
 	public:
+		virtual ~Filter() {};
 		virtual bool pass(Object& o) = 0;
 		void filterTable(structures::Table<K, Object*>* inTab, structures::UnsortedSequenceTable<K, Object*>* filteredTab);
 	};

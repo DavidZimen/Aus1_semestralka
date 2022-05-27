@@ -145,6 +145,7 @@
     <ClCompile Include="structures\vector\vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bodove_Vyhladavanie.h" />
     <ClInclude Include="criterion.h" />
     <ClInclude Include="criterion_Uj.h" />
     <ClInclude Include="criterion_UJ_Nadradena.h" />
@@ -173,6 +174,8 @@
     <ClInclude Include="filter_UJ_VekPodiel.h" />
     <ClInclude Include="Filter_UJ_VzdelaniePocet.h" />
     <ClInclude Include="filter_UJ_VzdelaniePodiel.h" />
+    <ClInclude Include="filtrovanie.h" />
+    <ClInclude Include="funcionality.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="selectionCriterion.h" />
     <ClInclude Include="selectionCriterion_MAX.h" />

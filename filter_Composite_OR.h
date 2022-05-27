@@ -7,13 +7,13 @@ namespace filter
 	class FilterCompositeOR : public FilterComposite<K, Object>
 	{
 	public:
-		bool pass(const Object& o) override;
+		bool pass(Object& o) override;
 	};
 
 	template<typename K, typename Object>
-	inline bool FilterCompositeOR<K, Object>::pass(const Object& o)
+	inline bool FilterCompositeOR<K, Object>::pass(Object& o)
 	{
-		for (auto filter : filters_) {
+		for (auto filter : *FilterComposite<K, Object>::filters_) {
 			if (filter->pass(o)) {
 				return true;
 			}

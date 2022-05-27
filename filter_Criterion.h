@@ -5,14 +5,14 @@
 namespace filter
 {
 	template<typename K, typename Object, typename Value>
-	class FilterCriterion : public Filter<K, Object>
+	class FilterCriterion : public virtual Filter<K, Object>
 	{
 	private:
 		crits::Criterion<Object, Value>* criterion_;
 	public:
 		FilterCriterion(crits::Criterion<Object, Value>* criterion);
 		~FilterCriterion();
-		bool pass(const Object& o) override;
+		bool pass(Object& o) override;
 	protected:
 		virtual bool passFilter(Value v) = 0;
 	};
@@ -31,8 +31,10 @@ namespace filter
 	}
 
 	template<typename K, typename Object, typename Value>
-	inline bool FilterCriterion<K, Object, Value>::pass(const Object& o)
+	inline bool FilterCriterion<K, Object, Value>::pass(Object& o)
 	{
-		return passFilter(criterion_->evaluate(o));
+		if (criterion_ != nullptr) {
+			return passFilter(criterion_->evaluate(o));
+		}
 	}
 }

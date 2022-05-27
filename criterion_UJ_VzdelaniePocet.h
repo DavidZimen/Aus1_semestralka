@@ -16,6 +16,7 @@ namespace crits
 		vzdelanie_(vzdelanie)
 	{
 	}
+
 	inline int CriterionUJVzdelaniePocet::evaluate(uj::UzemnaJednotka& o)
 	{
 		return o.pocetObyvatelovSoVzdelanim(vzdelanie_);

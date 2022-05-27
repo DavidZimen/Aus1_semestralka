@@ -2,6 +2,7 @@
 #include "criterion_UJ_Prislusnost.h"
 #include "filter_Criterion_Value.h"
 
+
 namespace filter
 {
 	template<typename K>
