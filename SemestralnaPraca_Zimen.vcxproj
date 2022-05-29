@@ -202,8 +202,10 @@
     <ClInclude Include="structures\types.h" />
     <ClInclude Include="structures\utils.h" />
     <ClInclude Include="structures\vector\vector.h" />
+    <ClInclude Include="triedenie.h" />
     <ClInclude Include="typ_uj.h" />
     <ClInclude Include="uzemna_jednotka.h" />
+    <ClInclude Include="vyberove_Kriteria.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

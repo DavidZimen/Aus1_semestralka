@@ -22,34 +22,60 @@
 #include "criterion_UJ_VzdelaniePocet.h"
 #include "criterion_UJ_VzdelaniePodiel.h"
 
-
 namespace func
 {
+	typedef typename filter::Filter<std::wstring, uj::UzemnaJednotka> Filter;
+	typedef typename structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*> UST;
+	typedef typename structures::SequenceTable<std::wstring, uj::UzemnaJednotka*> ST;
+
 	class Filtrovanie : public virtual Funcionality
 	{
 	public:
+		virtual ~Filtrovanie() {};
 		void spusti(uj::Stat* stat) override;
-	protected:
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* vyberFilter();
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getNazov();
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getPrislusnost();
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getTyp();
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getVek(int volba);
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getVekSkup(int volba);
-		filter::Filter<std::wstring, uj::UzemnaJednotka>* getVzdel(int volba);
-		structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* getTab(uj::Stat* stat, int moznost) override;
-		void vypisTabulku(structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* filteredTab);
 	private:
+		Filter* vyberFilter();
+		Filter* getNazov();
+		Filter* getPrislusnost();
+		Filter* getTyp();
+		Filter* getVek(int volba);
+		Filter* getVekSkup(int volba);
+		Filter* getVzdel(int volba);
+		structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* getTab(uj::Stat* stat, int moznost) override;
 		void getMinMax(std::wstring& min, std::wstring& max);
+		void registerToCompositeFilter(filter::FilterComposite<std::wstring, uj::UzemnaJednotka>* filterC, std::wstring& volba);
+	protected:
+		UST* filterTable(structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* tab, std::wstring& volba);
+		virtual void vypisTabulku(ST* filteredTab);
 	};
 
 	inline void Filtrovanie::spusti(uj::Stat* stat)
 	{
-		auto tab = Funcionality::zvolUroven(stat);
+		std::wcout << '\n' << L"---------------------------------Filtrovanie---------------------------------" << '\n';
+		
+		
 		std::wstring volba;
+		auto tab = Funcionality::zvolUroven(stat);
+
+		auto filteredTab = filterTable(tab, volba);
+		if (filteredTab != nullptr) {
+			vypisTabulku(filteredTab);
+		}
+
+		delete filteredTab;
+		std::wcout << '\n' << L"-----------------------------------------------------------------------------" << '\n';
+	}
+
+	inline structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* Filtrovanie::filterTable(structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* tab, std::wstring& volba)
+	{
+		
 		std::wcout << L"Chcete zložený filter ? [A/N]: ";
 		std::getline(std::wcin, volba);
 		std::wcout << '\n';
+
+		Filter* filter = nullptr;
+		filter::FilterComposite<std::wstring, uj::UzemnaJednotka>* filterC = nullptr;
+		auto filteredTab = new UST();
 
 		if (volba == L"A" || volba == L"a") {
 			std::wcout << L"AND alebo OR filter ? [and/or]: ";
@@ -57,80 +83,30 @@ namespace func
 			std::wcout << '\n';
 
 			if (volba == L"and") {
-				auto filter = new filter::FilterCompositeAND<std::wstring, uj::UzemnaJednotka>();
-				filter->registerFilter(vyberFilter());
+				filterC = new filter::FilterCompositeAND<std::wstring, uj::UzemnaJednotka>();
 
-				bool dalsi = true;
-				while (dalsi) {
-					std::wcout << L"Registrova ïalší ? [A/N]: ";
-					std::getline(std::wcin, volba);
+				registerToCompositeFilter(filterC, volba);
 
-					if (volba == L"A" || volba == L"a") {
-						filter->registerFilter(vyberFilter());
-						dalsi = true;
-					}
-					else {
-						dalsi = false;
-					}
-				}
-
-				auto filteredTab = new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>();
-
-				filter->filterTable(tab, filteredTab);
-				vypisTabulku(filteredTab);
-
-				delete filter;
-				delete filteredTab;
-				
+				filterC->filterTable(tab, filteredTab);
+				delete filterC;
 			}
 			else if (volba == L"or") {
-				auto filter = new filter::FilterCompositeOR<std::wstring, uj::UzemnaJednotka>();
-				filter->registerFilter(vyberFilter());
+				filterC = new filter::FilterCompositeOR<std::wstring, uj::UzemnaJednotka>();
 
-				bool dalsi = true;
-				while (dalsi) {
-					std::wcout << L"Registrova ïalší ? [A/N]: ";
-					std::getline(std::wcin, volba);
+				registerToCompositeFilter(filterC, volba);
 
-					if (volba == L"A" || volba == L"a") {
-						filter->registerFilter(vyberFilter());
-						dalsi = true;
-					}
-					else {
-						dalsi = false;
-					}
-				}
-
-				auto filteredTab = new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>();
-
-				filter->filterTable(tab, filteredTab);
-				vypisTabulku(filteredTab);
-
-				delete filter;
-				delete filteredTab;
+				filterC->filterTable(tab, filteredTab);
+				delete filterC;
 			}
 		}
-		else if (volba == L"N" || volba == L"n") {
-			auto filter = vyberFilter();
-			//filter::FilterUJVekPocet<std::wstring> filter(100, L"žena", 1, 15);
-			//auto crit = new crits::CriterionUJVekPocet(100, L"žena");
-			//filter::FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, int> filter(crit, 1, 15);
-			auto filteredTab = new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>();
+		else {
+			filter = vyberFilter();
 			
 			filter->filterTable(tab, filteredTab);
-			vypisTabulku(filteredTab);
-
-			//delete dynamic_cast<filter::FilterCriterion<std::wstring, uj::UzemnaJednotka, int>*>(filter);
 			delete filter;
-			delete filteredTab;
 		}
 
-		std::wcout << L"Znova ? [A/N]: ";
-		std::getline(std::wcin, volba);
-
-		if (volba == L"A" || volba == L"a") {
-			spusti(stat);
-		}
+		return filteredTab;
 	}
 
 	inline filter::Filter<std::wstring, uj::UzemnaJednotka>* Filtrovanie::vyberFilter()
@@ -189,7 +165,7 @@ namespace func
 	{
 		std::wstring vyssiCelok, maPatrit;
 
-		std::wcout << L"Zadajte nazov príslušného vyššieho celku (napr. Žilinský kraj, Okres Žilina): ";
+		std::wcout << '\n' << L"Zadajte nazov príslušného vyššieho celku (napr. Žilinský kraj, Okres Žilina): ";
 		std::getline(std::wcin, vyssiCelok);
 
 		std::wcout << L"Má tam patri ? [A/N]: ";
@@ -209,7 +185,7 @@ namespace func
 		std::wstring volba;
 		bool spravne = false;
 
-		std::wcout << L"Vyberte z nasledujúcivh možností: " << '\n';
+		std::wcout << '\n' << L"Vyberte z nasledujúcivh možností: " << '\n';
 		std::wcout << L"1 - OBEC " << '\n';
 		std::wcout << L"2 - OKRES " << '\n';
 		std::wcout << L"3 - KRAJ " << '\n';
@@ -242,11 +218,10 @@ namespace func
 		std::wstring pohlavie, vek, min, max;
 		bool spravne = false;
 
-		std::wcout << L"Vek: ";
+		std::wcout << '\n' << L"Vek: ";
 		std::getline(std::wcin, vek);
 		std::wcout << L"Pohlavie: ";
 		std::getline(std::wcin, pohlavie);
-
 
 		getMinMax(min, max);
 
@@ -259,15 +234,13 @@ namespace func
 		else {
 			return nullptr;
 		}
-		
-		//return new filter::FilterCriterionInterval<std::wstring, uj::UzemnaJednotka, int>(new crits::CriterionUJVekPocet(std::stoi(vek), pohlavie), std::stoi(min), std::stoi(max));
 	}
 
 	inline filter::Filter<std::wstring, uj::UzemnaJednotka>* Filtrovanie::getVekSkup(int volba)
 	{
 		std::wstring vekSkupina, min, max;
 		bool spravne = false;
-		std::wcout << L"Veková skupina: ";
+		std::wcout << '\n' << L"Veková skupina: ";
 		std::getline(std::wcin, vekSkupina);
 
 		getMinMax(min, max);
@@ -288,7 +261,7 @@ namespace func
 	{
 		std::wstring vzdelanie, min, max;
 		bool spravne = false;
-		std::wcout << L"Vzdelanie: ";
+		std::wcout << '\n' << L"Vzdelanie: ";
 		std::getline(std::wcin, vzdelanie);
 
 		getMinMax(min, max);
@@ -319,18 +292,19 @@ namespace func
 		}
 	}
 
-	inline void Filtrovanie::vypisTabulku(structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* filteredTab)
+	inline void Filtrovanie::vypisTabulku(ST* filteredTab)
 	{
 		for (auto uj : *filteredTab) {
 			uj->accessData()->vypis();
 		}
 	}
 
+
 	inline void Filtrovanie::getMinMax(std::wstring& min, std::wstring& max)
 	{
 		bool spravne = false;
 		while (!spravne) {
-			std::wcout << L"Minimum: ";
+			std::wcout << '\n' << L"Minimum: ";
 			std::getline(std::wcin, min);
 			std::wcout << L"Maximum: ";
 			std::getline(std::wcin, max);
@@ -339,7 +313,26 @@ namespace func
 				spravne = true;
 			}
 			else {
-				std::wcout << L"Zle zadané hodnoty minima a maxima. Znova" << '\n';
+				std::wcout << L"Zle zadané hodnoty minima a maxima. Zadajte znova." << '\n';
+			}
+		}
+	}
+
+	inline void Filtrovanie::registerToCompositeFilter(filter::FilterComposite<std::wstring, uj::UzemnaJednotka>* filterC, std::wstring& volba)
+	{
+		filterC->registerFilter(vyberFilter());
+
+		bool dalsi = true;
+		while (dalsi) {
+			std::wcout << '\n' << L"Registrova ïalší ? [A/N]: ";
+			std::getline(std::wcin, volba);
+
+			if (volba == L"A" || volba == L"a") {
+				filterC->registerFilter(vyberFilter());
+				dalsi = true;
+			}
+			else {
+				dalsi = false;
 			}
 		}
 	}

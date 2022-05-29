@@ -184,7 +184,7 @@ namespace uj
 	inline void UzemnaJednotka::vypis()
 	{
 		if (nadradena_ != nullptr) {
-			std::wcout << mediumTitle_ << L" " << getPocetObyvatelov() << L" " << std::endl;
+			std::wcout << mediumTitle_ << '\t';
 		}
 	}
 

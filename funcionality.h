@@ -18,6 +18,8 @@ namespace func
 	{
 	public:
 		virtual void spusti(uj::Stat* stat) = 0;
+		virtual ~Funcionality() {};
+
 	protected:
 		structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* zvolUroven(uj::Stat* stat);
 		virtual structures::SequenceTable<std::wstring, uj::UzemnaJednotka*>* getTab(uj::Stat* stat, int moznost) = 0;

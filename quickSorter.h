@@ -29,15 +29,13 @@ namespace sort
 	template<typename K, typename Object, typename Value>
 	inline QuickSorter<K, Object, Value>::~QuickSorter()
 	{
-		delete criterion_;
-		criterion_ = nullptr;
 	}
 
 	template<typename K, typename Object, typename Value>
-	inline void QuickSorter<K, Object, Value>::sort(structures::UnsortedSequenceTable<K, Object*>& tab, crits::Criterion<Object, Value>& criterion, bool asc)
+	inline void QuickSorter<K, Object, Value>::sort(structures::UnsortedSequenceTable<K, Object*>& tab, crits::Criterion<Object, Value>& criterion, bool vzostupne)
 	{
-		asc_ = asc;
 		criterion_ = &criterion;
+		asc_ = vzostupne;
 		sortTable(tab);
 	}
 
@@ -76,7 +74,7 @@ namespace sort
 
 
 			if (left <= right) {
-				table.swap(left, right);
+				tab.swap(left, right);
 				left++;
 				right--;
 			}

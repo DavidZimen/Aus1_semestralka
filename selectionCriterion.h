@@ -1,6 +1,7 @@
 #pragma once
 #include "criterion.h"
 #include "../SemestralnaPraca_Zimen/structures/table/table.h"
+#include "../SemestralnaPraca_Zimen/structures/table/unsorted_sequence_table.h"
 
 namespace scrits
 {
@@ -9,16 +10,22 @@ namespace scrits
 	{
 	private:
 		crits::Criterion<Object, Value>* criterion_;
+		Value bestValue_;
+		Object* bestObject_;
+		K bestObjectKey_;
 	public:
-		SelectionCriterion(crits::Criterion<Object, Value>* criterion);
+		SelectionCriterion(crits::Criterion<Object, Value>* criterion, Value bestValue);
 		~SelectionCriterion();
-		virtual Object& selectBest(structures::Table<K, Object*>* tab);
+		structures::UnsortedSequenceTable<K, Object*>* selectBest(structures::Table<K, Object*>* tab);
+		crits::Criterion<Object, Value>* getCriterion();
 	protected:
 		virtual bool isTestedValueBest(Value bestNow, Value bestTested) = 0;
 	};
 
 	template<typename K, typename Object, typename Value>
-	inline SelectionCriterion<K, Object, Value>::SelectionCriterion(crits::Criterion<Object, Value>* criterion)
+	inline SelectionCriterion<K, Object, Value>::SelectionCriterion(crits::Criterion<Object, Value>* criterion, Value bestValue) :
+		criterion_(criterion),
+		bestValue_(bestValue)
 	{
 	}
 
@@ -30,22 +37,30 @@ namespace scrits
 	}
 
 	template<typename K, typename Object, typename Value>
-	inline Object& SelectionCriterion<K, Object, Value>::selectBest(structures::Table<K, Object*>* tab)
+	inline structures::UnsortedSequenceTable<K, Object*>* SelectionCriterion<K, Object, Value>::selectBest(structures::Table<K, Object*>* tab)
 	{
-		Object& testedO;
-		Object& bestO;
+		Object* testedO = nullptr;
 		Value testedV;
-		Value bestV;
 
 		for (auto item : *tab) {
-			testedO = *item->accessData();
-			testedV = criterion_->evaluate(testedO);
-			if (isTestedValueBest(bestV, testedV)) {
-				bestV = testedV;
-				bestO = testedO;
+			testedO = item->accessData();
+			testedV = criterion_->evaluate(*testedO);
+			if (isTestedValueBest(bestValue_, testedV)) {
+				bestValue_ = testedV;
+				bestObject_ = testedO;
+				bestObjectKey_ = item->getKey();
 			}
 		}
 
-		return bestO;
+		auto table = new structures::UnsortedSequenceTable<K, Object*>();
+		table->insert(bestObjectKey_, bestObject_);
+
+		return table;
+	}
+
+	template<typename K, typename Object, typename Value>
+	inline crits::Criterion<Object, Value>* SelectionCriterion<K, Object, Value>::getCriterion()
+	{
+		return criterion_;
 	}
 }

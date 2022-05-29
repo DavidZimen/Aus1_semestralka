@@ -1,14 +1,13 @@
-﻿// SemestralnaPraca_Zimen.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
-#include <string>
+﻿#include <string>
 #include <iostream>
-#include "../SemestralnaPraca_Zimen/loader.h"
-#include "../SemestralnaPraca_Zimen/structures/heap_monitor.h"
-#include "../SemestralnaPraca_Zimen/stat.h"
+#include "loader.h"
+#include "stat.h"
 #include "bodove_Vyhladavanie.h"
+#include "vyberove_Kriteria.h"
 #include "filtrovanie.h"
+#include "triedenie.h"
 #include "../SemestralnaPraca_Zimen/structures/table/unsorted_sequence_table.h"
+#include "../SemestralnaPraca_Zimen/structures/heap_monitor.h"
 
 #include <Windows.h>
 #pragma execution_character_set("utf-8")
@@ -18,7 +17,7 @@ int main()
     SetConsoleOutputCP(1250);
     SetConsoleCP(1250);
     setlocale(LC_ALL, "slovak");
-
+    
     std::wcout << L"---------------Aplikácia na spracovanie údajov zo Sčítania 2021--------------" << '\n';
     std::wcout << '\n';
     std::wcout << L"Pre vyhľadanie podľa vzdelania prosím napíšte jednu z nasledujúcich možností:" << '\n';
@@ -41,32 +40,54 @@ int main()
     std::wcout << L"'žena'" << '\n';
     std::wcout << L"-----------------------------------------------------------------------------" << '\n';
 
-    //auto statP = data_loading::Loader::getInstance().LoadData();
+    auto statP = data_loading::Loader::getInstance().LoadData();
 
-    //func::BodoveVyhladavanie bv;
-    //bv.spusti(statP);
+    bool koniec = false;
 
-    //func::Filtrovanie f;
-    //f.spusti(statP);
-
-    //auto tab = statP->getObceU();
-    auto tabFilt = new structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>();
-    auto crit = new crits::CriterionUJPrislusnost(L"Okres Sobrance");
-
-    auto filter = new filter::FilterCriterionValue<std::wstring, uj::UzemnaJednotka, bool>(crit, true);
-    uj::UzemnaJednotka* u1 = new uj::UzemnaJednotka(uj::TypUzemJednotka::OBEC, L"macka", L"macka", L"macka", L"macka");
-    uj::UzemnaJednotka* u2 = new uj::UzemnaJednotka(uj::TypUzemJednotka::OKRES, L"Okres Sobrance", L"Okres Sobrance", L"Okres Sobrance", L"Okres Sobrance");
-
-    u1->setNadradena(u2);
+    std::wcout << '\n' << L"Zvoľte si funkcionalitu na otestovanie" << '\n';
+    std::wcout << L"1 - Bodové vyhľadávanie" << '\n';
+    std::wcout << L"2 - Filtorovanie" << '\n';
+    std::wcout << L"3 - Triedenie" << '\n';
+    std::wcout << L"4 - Výberové kritéria" << '\n';
+    std::wcout << L"K - koniec" << '\n';
     
-    //bool hodnota = crit.evaluate(*u1);
-    //filter->filterTable(tab, tabFilt);
+    std::wstring volba;
+    func::BodoveVyhladavanie bv;
+    func::Filtrovanie f;
+    func::Triedenie tr;
+    func::VyberoveKriteria vk;
 
-    delete u1;
-    delete u2;
-    delete tabFilt;
-    delete filter;
 
-    //delete statP;
+    while (!koniec) {
+        std::wcout << '\n' << L"Zvolená funkcionalita: ";
+        std::getline(std::wcin, volba);
+        std::wcout << '\n';
+
+        if (volba == L"1") {
+            bv.spusti(statP);
+            koniec = false;
+        }
+        else if (volba == L"2") {
+            f.spusti(statP);
+            koniec = false;
+        }
+        else if (volba == L"3") {
+            tr.spusti(statP);
+            koniec = false;
+        }
+        else if (volba == L"4") {
+            vk.spusti(statP);
+            koniec = false;
+        }
+        else if (volba == L"K") {
+            koniec = true;
+        }
+        else {
+            std::wcout << L"Nesprávny výber." << '\n';
+            koniec = false;
+        }
+    }
+
+    delete statP;
     _CrtDumpMemoryLeaks();
 }

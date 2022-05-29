@@ -14,7 +14,7 @@ namespace scrits
 
 	template<typename K>
 	inline SelectionCriterionNajvacsiaVekovaSkupina<K>::SelectionCriterionNajvacsiaVekovaSkupina(std::wstring vekSkupina) :
-		SelectionCriterionMAX<K, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPocet(vekSkupina))
+		SelectionCriterionMAX<K, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPocet(vekSkupina), -1)
 	{
 	}
 }

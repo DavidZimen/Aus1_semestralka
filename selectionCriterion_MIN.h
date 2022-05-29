@@ -7,14 +7,14 @@ namespace scrits
 	class SelectionCriterionMIN : public SelectionCriterion<K, Object, Value>
 	{
 	public:
-		SelectionCriterionMIN(crits::Criterion<Object, Value>* criterion);
+		SelectionCriterionMIN(crits::Criterion<Object, Value>* criterion, Value bestValue);
 	protected:
 		bool isTestedValueBest(Value bestNow, Value bestTested);
 	};
 
 	template<typename K, typename Object, typename Value>
-	inline SelectionCriterionMIN<K, Object, Value>::SelectionCriterionMIN(crits::Criterion<Object, Value>* criterion) :
-		SelectionCriterion<K, Object, Value>(criterion)
+	inline SelectionCriterionMIN<K, Object, Value>::SelectionCriterionMIN(crits::Criterion<Object, Value>* criterion, Value bestValue) :
+		SelectionCriterion<K, Object, Value>(criterion, bestValue)
 	{
 	}
 

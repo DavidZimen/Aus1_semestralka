@@ -240,6 +240,12 @@
     <ClInclude Include="filtrovanie.h">
       <Filter>functionalities</Filter>
     </ClInclude>
+    <ClInclude Include="triedenie.h">
+      <Filter>functionalities</Filter>
+    </ClInclude>
+    <ClInclude Include="vyberove_Kriteria.h">
+      <Filter>functionalities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

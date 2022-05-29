@@ -14,7 +14,7 @@ namespace scrits
 
 	template<typename K>
 	inline SelectionCriterionNajmensiaVekovaSkupina<K>::SelectionCriterionNajmensiaVekovaSkupina(std::wstring vekSkupina) :
-		SelectionCriterionMIN<K, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPocet(vekSkupina))
+		SelectionCriterionMIN<K, uj::UzemnaJednotka, int>(new crits::CriterionUJVekovaSkupinaPocet(vekSkupina), 6000000)
 	{
 	}
 }

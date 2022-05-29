@@ -15,8 +15,8 @@ namespace func
 
 	inline void BodoveVyhladavanie::spusti(uj::Stat* stat)
 	{
-		//crits::CriterionUJNazov critNazov;
-
+		std::wcout << '\n' << L"-----------------------------Bodové vyh¾adávanie-----------------------------" << '\n';
+		
 		crits::CriterionUJNazov* crit = new crits::CriterionUJNazov();
 
 		auto tab = Funcionality::zvolUroven(stat);
@@ -24,25 +24,20 @@ namespace func
 		std::wstring nazov;
 		getUJ(nazov);
 
-		while (nazov != L"K" || nazov != L"k") {
-			if (nazov == L"K" || nazov == L"k") {
-				break;
+		try {
+			auto uj = tab->find(nazov);
+			if (nazov == crit->evaluate(*uj)) {
+				uj->vypis();
 			}
-
-			try {
-				auto uj = tab->find(nazov);
-				if (nazov == crit->evaluate(*uj)) {
-					uj->vypis();
-				}
-				getUJ(nazov);
-			}
-			catch (const std::logic_error&) {
-				std::wcout << L"Nenachádza sa v tabu¾ke." << std::endl;
-				getUJ(nazov);
-			}
+			getUJ(nazov);
+		}
+		catch (const std::logic_error&) {
+			std::wcout << L"Nenachádza sa v tabu¾ke." << std::endl;
+			getUJ(nazov);
 		}
 
 		delete crit;
+		std::wcout << '\n' << L"-----------------------------------------------------------------------------" << '\n';
 	}
 
 	inline void BodoveVyhladavanie::getUJ(std::wstring& uj)
