@@ -29,11 +29,9 @@ namespace func
 			if (nazov == crit->evaluate(*uj)) {
 				uj->vypis();
 			}
-			getUJ(nazov);
 		}
 		catch (const std::logic_error&) {
 			std::wcout << L"Nenachádza sa v tabu¾ke." << std::endl;
-			getUJ(nazov);
 		}
 
 		delete crit;

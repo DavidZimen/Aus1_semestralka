@@ -1,6 +1,7 @@
 #pragma once
 #include "filtrovanie.h"
 #include "quickSorter.h"
+#include "conversion.h"
 
 namespace func
 {
@@ -90,7 +91,7 @@ namespace func
 		std::wcout << '\n' << L"-----------------------------------" << '\n';
 		for (auto item : *tab) {
 			item->accessData()->vypis();
-			//std::wcout << kTyp.evaluate(*item->accessData()) << '\n';
+			std::wcout << uj::Conversion::getInstance().toString(kTyp.evaluate(*item->accessData())) << '\n';
 		}
 		std::wcout << '\n' << L"-----------------------------------" << '\n';
 	}
@@ -101,6 +102,8 @@ namespace func
 		crits::CriterionUJNadradena kNadradena;
 
 		sorter.sort(*tab, kNadradena, vzostupne_);*/
+
+
 	}
 
 	inline void Triedenie::utriedPodlaPrislusnosti(structures::UnsortedSequenceTable<std::wstring, uj::UzemnaJednotka*>* tab)

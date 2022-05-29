@@ -136,7 +136,7 @@ namespace data_loading
 			std::getline(fileKraje, krShortTitle, eolChar_);
 
 			kraj = new uj::UzemnaJednotka(uj::TypUzemJednotka::KRAJ, krCode, krOfficialTitle, krOfficialTitle, krShortTitle);
-			kraj->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
+			//kraj->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
 			std::wstring toCompareKr = krCode.substr(5, 5);
 			if (toCompareKr == L"*****") {
 				toCompareKr = L"SKZZZ";
@@ -150,7 +150,6 @@ namespace data_loading
 
 				okresyU->insert(okCode, okres);
 				okresy->insert(okOfficialTitle, okres);
-				kraj->addSubUnit(okres);
 				okresMimoKraja = nullptr;
 				delete vzdelanieArrOk;
 			}
@@ -166,7 +165,7 @@ namespace data_loading
 				std::getline(fileOkresy, okShortTitle, eolChar_);
 
 				okres = new uj::UzemnaJednotka(uj::TypUzemJednotka::OKRES, okCode, okOfficialTitle, okOfficialTitle, okShortTitle);
-				okres->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
+				//okres->setSubUnits(new structures::ArrayList<uj::UzemnaJednotka*>());
 
 				if (obecMimoOkresu != nullptr) {
 					addToSupUnit(vekMuziOk, vekMuziOb);
@@ -176,7 +175,6 @@ namespace data_loading
 
 					obceU->insert(obCode, obec);
 					obce->insert(obMediumTitle, obec);
-					okres->addSubUnit(obec);
 					obecMimoOkresu = nullptr;
 					delete vzdelanieArrOb;
 				}
@@ -223,7 +221,6 @@ namespace data_loading
 
 						obceU->insert(obCode, obec);
 						obce->insert(obMediumTitle, obec);
-						okres->addSubUnit(obec);
 						delete vzdelanieArrOb;
 					}
 					else {
@@ -244,7 +241,6 @@ namespace data_loading
 
 					okresyU->insert(okCode, okres);
 					okresy->insert(okOfficialTitle, okres);
-					kraj->addSubUnit(okres);
 					delete vzdelanieArrOk;
 				}
 				else {
@@ -281,6 +277,7 @@ namespace data_loading
 		fileVzdelanie.close();
 
 		std::wcout << "Data successfully loaded." << std::endl;
+		std::wcout << L"-----------------------------------------------------------------------------" << '\n';
 
 		return stat;
 	}

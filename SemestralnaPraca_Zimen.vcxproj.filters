@@ -47,6 +47,9 @@
     <Filter Include="functionalities">
       <UniqueIdentifier>{ae9702d5-2120-40fb-b7db-30345ce1c7da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="class_diagrams">
+      <UniqueIdentifier>{25675d38-3a57-4129-a02b-ae4e5902bb49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SemestralnaPraca_Zimen.cpp">
@@ -246,8 +249,8 @@
     <ClInclude Include="vyberove_Kriteria.h">
       <Filter>functionalities</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="conversion.h">
+      <Filter>uzemne_jednotky</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

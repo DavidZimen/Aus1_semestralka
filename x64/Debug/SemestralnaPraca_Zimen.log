@@ -1,35 +1,6 @@
 ﻿  SemestralnaPraca_Zimen.cpp
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(290,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(320,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(214,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(210): message : while compiling class template member function 'void structures::ArrayList<uj::UzemnaJednotka *>::add(const T &)'
-          with
-          [
-              T=uj::UzemnaJednotka *
-          ]
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\uzemna_jednotka.h(114): message : see reference to function template instantiation 'void structures::ArrayList<uj::UzemnaJednotka *>::add(const T &)' being compiled
-          with
-          [
-              T=uj::UzemnaJednotka *
-          ]
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\uzemna_jednotka.h(66): message : see reference to class template instantiation 'structures::ArrayList<uj::UzemnaJednotka *>' being compiled
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(234,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(220): message : while compiling class template member function 'void structures::ArrayList<uj::UzemnaJednotka *>::insert(const T &,int)'
-          with
-          [
-              T=uj::UzemnaJednotka *
-          ]
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(261,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(255): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(int)'
-          with
-          [
-              T=uj::UzemnaJednotka *
-          ]
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(247): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(int)' being compiled
-          with
-          [
-              T=uj::UzemnaJednotka *
-          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(287,46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(317,40): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\table\sorted_sequence_table.h(84,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\table\sorted_sequence_table.h(82): message : while compiling class template member function 'void structures::SortedSequenceTable<std::wstring,uj::UzemnaJednotka *>::insert(const K &,const T &)'
           with
@@ -51,11 +22,6 @@ C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algo
               K=std::wstring,
               T=uj::UzemnaJednotka *
           ]
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(303,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(298): message : while compiling class template member function 'void structures::ArrayList<uj::UzemnaJednotka *>::enlarge(void)'
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(212): message : see reference to function template instantiation 'void structures::ArrayList<uj::UzemnaJednotka *>::enlarge(void)' being compiled
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(136): message : while compiling class template member function 'structures::ArrayList<uj::UzemnaJednotka *>::ArrayList(void)'
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(139): message : see reference to function template instantiation 'structures::ArrayList<uj::UzemnaJednotka *>::ArrayList(void)' being compiled
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\linked_list.h(375,1): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\linked_list.h(367): message : while compiling class template member function 'int structures::LinkedList<filter::Filter<std::wstring,uj::UzemnaJednotka> *>::getIndexOf(const T &)'
           with
@@ -71,13 +37,47 @@ C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algo
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Composite.h(20): message : while compiling class template member function 'filter::FilterComposite<std::wstring,uj::UzemnaJednotka>::FilterComposite(void)'
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Composite_AND.h(11): message : see reference to function template instantiation 'filter::FilterComposite<std::wstring,uj::UzemnaJednotka>::FilterComposite(void)' being compiled
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Composite_AND.h(8): message : see reference to class template instantiation 'filter::FilterComposite<std::wstring,uj::UzemnaJednotka>' being compiled
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filtrovanie.h(82): message : see reference to class template instantiation 'filter::FilterCompositeAND<std::wstring,uj::UzemnaJednotka>' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filtrovanie.h(86): message : see reference to class template instantiation 'filter::FilterCompositeAND<std::wstring,uj::UzemnaJednotka>' being compiled
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\quickSorter.h(45,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\quickSorter.h(44): message : while compiling class template member function 'void sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>::sortTable(structures::UnsortedSequenceTable<std::wstring,uj::UzemnaJednotka *> &)'
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\quickSorter.h(39): message : see reference to function template instantiation 'void sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>::sortTable(structures::UnsortedSequenceTable<std::wstring,uj::UzemnaJednotka *> &)' being compiled
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\quickSorter.h(23): message : while compiling class template member function 'sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>::QuickSorter(void)'
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\triedenie.h(66): message : see reference to function template instantiation 'sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>::QuickSorter(void)' being compiled
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\triedenie.h(66): message : see reference to class template instantiation 'sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\triedenie.h(71): message : see reference to function template instantiation 'sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>::QuickSorter(void)' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\triedenie.h(71): message : see reference to class template instantiation 'sort::QuickSorter<std::wstring,uj::UzemnaJednotka,std::wstring>' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(214,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(210): message : while compiling class template member function 'void structures::ArrayList<structures::TableItem<K,T> *>::add(structures::TableItem<K,T> *const &)'
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\table\unsorted_sequence_table.h(48): message : see reference to class template instantiation 'structures::ArrayList<structures::TableItem<K,T> *>' being compiled
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\table\unsorted_sequence_table.h(47): message : while compiling class template member function 'structures::UnsortedSequenceTable<std::wstring,int>::UnsortedSequenceTable(void)'
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\loader.h(104): message : see reference to function template instantiation 'structures::UnsortedSequenceTable<std::wstring,int>::UnsortedSequenceTable(void)' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\uzemna_jednotka.h(63): message : see reference to class template instantiation 'structures::UnsortedSequenceTable<std::wstring,int>' being compiled
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(234,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(220): message : while compiling class template member function 'void structures::ArrayList<structures::TableItem<K,T> *>::insert(structures::TableItem<K,T> *const &,int)'
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(261,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(255): message : while compiling class template member function 'T structures::ArrayList<T>::removeAt(int)'
+          with
+          [
+              T=structures::TableItem<std::wstring,int> *
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(247): message : see reference to function template instantiation 'T structures::ArrayList<T>::removeAt(int)' being compiled
+          with
+          [
+              T=structures::TableItem<std::wstring,int> *
+          ]
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\linked_list.h(416,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\linked_list.h(415): message : while compiling class template member function 'structures::LinkedListItem<T> *structures::LinkedList<T>::getItemAtIndex(int)'
           with
@@ -91,9 +91,35 @@ C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algo
           ]
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\linked_list.h(201): message : while compiling class template member function 'structures::LinkedList<filter::Filter<std::wstring,uj::UzemnaJednotka> *>::LinkedList(void)'
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Composite.h(21): message : see reference to function template instantiation 'structures::LinkedList<filter::Filter<std::wstring,uj::UzemnaJednotka> *>::LinkedList(void)' being compiled
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,bool>::pass': not all control paths return a value
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> > >::pass': not all control paths return a value
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(303,1): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(298): message : while compiling class template member function 'void structures::ArrayList<structures::TableItem<K,T> *>::enlarge(void)'
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(212): message : see reference to function template instantiation 'void structures::ArrayList<structures::TableItem<K,T> *>::enlarge(void)' being compiled
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\list\array_list.h(136): message : while compiling class template member function 'structures::ArrayList<structures::TableItem<K,T> *>::ArrayList(void)'
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\structures\table\unsorted_sequence_table.h(48): message : see reference to function template instantiation 'structures::ArrayList<structures::TableItem<K,T> *>::ArrayList(void)' being compiled
+          with
+          [
+              K=std::wstring,
+              T=int
+          ]
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\conversion.h(37): warning C4715: 'uj::Conversion::toString': not all control paths return a value
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,enum uj::TypUzemJednotka>::pass': not all control paths return a value
-C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,double>::pass': not all control paths return a value
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> > >::pass': not all control paths return a value
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,bool>::pass': not all control paths return a value
 C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,int>::pass': not all control paths return a value
+C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\filter_Criterion.h(39): warning C4715: 'filter::FilterCriterion<std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t> >,uj::UzemnaJednotka,double>::pass': not all control paths return a value
   SemestralnaPraca_Zimen.vcxproj -> C:\Users\david\OneDrive - Žilinská univerzita v Žiline\UNIZA\4. semester\Algoritmy a údajové štruktúry 1\SemestralnaPraca_Zimen\SemestralnaPraca_Zimen\x64\Debug\SemestralnaPraca_Zimen.exe

@@ -13,6 +13,7 @@ namespace filter
 		FilterCriterion(crits::Criterion<Object, Value>* criterion);
 		~FilterCriterion();
 		bool pass(Object& o) override;
+		crits::Criterion<Object, Value>* getCriterion();
 	protected:
 		virtual bool passFilter(Value v) = 0;
 	};
@@ -36,5 +37,11 @@ namespace filter
 		if (criterion_ != nullptr) {
 			return passFilter(criterion_->evaluate(o));
 		}
+	}
+
+	template<typename K, typename Object, typename Value>
+	inline crits::Criterion<Object, Value>* FilterCriterion<K, Object, Value>::getCriterion()
+	{
+		return criterion_;
 	}
 }

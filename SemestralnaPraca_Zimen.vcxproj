@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bodove_Vyhladavanie.h" />
+    <ClInclude Include="conversion.h" />
     <ClInclude Include="criterion.h" />
     <ClInclude Include="criterion_Uj.h" />
     <ClInclude Include="criterion_UJ_Nadradena.h" />
@@ -206,9 +207,6 @@
     <ClInclude Include="typ_uj.h" />
     <ClInclude Include="uzemna_jednotka.h" />
     <ClInclude Include="vyberove_Kriteria.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

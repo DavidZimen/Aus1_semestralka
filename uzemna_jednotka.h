@@ -17,7 +17,6 @@ namespace uj
 		std::wstring mediumTitle_;
 		std::wstring shortTitle_;
 
-		structures::ArrayList<uj::UzemnaJednotka*>* subUnits_;
 		structures::Array<int>* vekMuzi;
 		structures::Array<int>* vekZeny_;
 		structures::UnsortedSequenceTable<std::wstring, int>* vzdelanie_;
@@ -26,11 +25,9 @@ namespace uj
 		~UzemnaJednotka();
 
 		void setNadradena(UzemnaJednotka* nadradena);
-		void setSubUnits(structures::ArrayList<uj::UzemnaJednotka*>* subUnits);
 		void setAgeMen(structures::Array<int>* ageMen);
 		void setAgeWomen(structures::Array<int>* ageWomen);
 		void setScholarship(structures::UnsortedSequenceTable<std::wstring, int>* scholarship);
-		void addSubUnit(UzemnaJednotka* subUnit);
 		int spocitajVekSkupinu(int vekOd, int vekDo);
 
 		std::wstring& getNazov() { return mediumTitle_; };
@@ -44,7 +41,6 @@ namespace uj
 		int pocetObyvatelovVDanejVekovejSkupine(std::wstring vekSkupina);
 
 		void vypis();
-		void vypisSubunits();
 	};
 
 	inline UzemnaJednotka::UzemnaJednotka(TypUzemJednotka typ, std::wstring code, std::wstring officialTitle, std::wstring mediumTitle, std::wstring shortTitle) :
@@ -55,7 +51,6 @@ namespace uj
 		shortTitle_(shortTitle),
 		nadradena_(nullptr)
 	{
-		subUnits_ = nullptr;
 		vekMuzi = nullptr;
 		vekZeny_ = nullptr;
 		vzdelanie_ = nullptr;
@@ -63,12 +58,10 @@ namespace uj
 
 	inline UzemnaJednotka::~UzemnaJednotka()
 	{
-		delete subUnits_;
 		delete vekMuzi;
 		delete vekZeny_;
 		delete vzdelanie_;
 
-		subUnits_ = nullptr;
 		vekMuzi = nullptr;
 		vekZeny_ = nullptr;
 		vzdelanie_ = nullptr;
@@ -78,13 +71,6 @@ namespace uj
 	{
 		if (nadradena_ == nullptr) {
 			nadradena_ = nadradena;
-		}
-	}
-
-	inline void UzemnaJednotka::setSubUnits(structures::ArrayList<uj::UzemnaJednotka*>* subUnits)
-	{
-		if (subUnits_ == nullptr) {
-			subUnits_ = subUnits;
 		}
 	}
 
@@ -109,11 +95,6 @@ namespace uj
 		}
 	}
 
-	inline void UzemnaJednotka::addSubUnit(UzemnaJednotka* subUnit)
-	{
-		subUnits_->add(subUnit);
-	}
-
 	inline int UzemnaJednotka::spocitajVekSkupinu(int vekOd, int vekDo)
 	{
 		int result = 0;
@@ -136,14 +117,14 @@ namespace uj
 
 	inline bool UzemnaJednotka::patriDoVyssiehoCelku(std::wstring vyssiCelok)
 	{
-		if (this->nadradena_ == nullptr) {
+		if (nadradena_ == nullptr) {
 			return false;
 		}
-		else if (this->nadradena_->getNazov() == vyssiCelok) {
+		else if (nadradena_->getNazov() == vyssiCelok) {
 			return true;
 		}
 		else {
-			return this->nadradena_->patriDoVyssiehoCelku(vyssiCelok);
+			return nadradena_->patriDoVyssiehoCelku(vyssiCelok);
 		}
 	}
 
@@ -159,6 +140,9 @@ namespace uj
 		}
 		else if (pohlavie == L"žena") {
 			return vekZeny_->at(vek);
+		}
+		else if (pohlavie == L"oboje") {
+			return vekMuzi->at(vek) + vekZeny_->at(vek);
 		}
 		else {
 			return -1;
@@ -185,24 +169,6 @@ namespace uj
 	{
 		if (nadradena_ != nullptr) {
 			std::wcout << mediumTitle_ << '\t';
-		}
-	}
-
-	inline void UzemnaJednotka::vypisSubunits()
-	{
-		switch (typ_) {
-			case TypUzemJednotka::OBEC:
-				std::wcout << L"" << '\n';
-				break;
-			case TypUzemJednotka::OKRES:
-				std::wcout << L"Poèet obcí: " << subUnits_->size() << '\n';
-				break;
-			case TypUzemJednotka::KRAJ:
-				std::wcout << L"Poèet okresov: " << subUnits_->size() << '\n';
-				break;
-			case TypUzemJednotka::STAT:
-				std::wcout << L"Poèet krajov: " << subUnits_->size() << '\n';
-				break;
 		}
 	}
 }

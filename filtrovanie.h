@@ -296,6 +296,7 @@ namespace func
 	{
 		for (auto uj : *filteredTab) {
 			uj->accessData()->vypis();
+			std::wcout << std::endl;
 		}
 	}
 
